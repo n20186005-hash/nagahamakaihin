@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  icon?: string;
+  image?: string;
+  imageAlt?: string;
+}
+const { eyebrow, title, text, icon = 'waves', image, imageAlt = '' } = Astro.props;
+---
+<section class="relative overflow-hidden border-b border-ink/10 bg-paper">
+  <div class="absolute -right-36 -top-36 h-96 w-96 rounded-full bg-sea-pale/70 blur-3xl"></div>
+  <div class="container-site relative grid items-center gap-10 py-16 md:min-h-[30rem] md:grid-cols-[1fr_.82fr] md:py-20">
+    <div>
+      <p class="eyebrow">{eyebrow}</p>
+      <div class="mt-5 flex items-start gap-4">
+        <span class="mt-1 hidden h-13 w-13 shrink-0 place-items-center rounded-full bg-ink text-white sm:grid"><Icon name={icon} size={25} /></span>
+        <h1 class="font-serif text-4xl font-semibold leading-tight tracking-[0.04em] sm:text-5xl">{title}</h1>
+      </div>
+      <p class="body-copy mt-6 max-w-2xl">{text}</p>
+    </div>
+    {image ? (
+      <figure class="relative">
+        <div class="absolute -left-4 -top-4 h-full w-full rounded-[2rem] border border-coral/40"></div>
+        <img src={image} alt={imageAlt} class="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-soft" />
+      </figure>
+    ) : (
+      <div class="sea-pattern grid aspect-[4/3] place-items-center rounded-[2rem] border border-ink/10">
+        <span class="grid h-24 w-24 place-items-center rounded-full bg-paper text-sea-dark shadow-card"><Icon name={icon} size={43} /></span>
+      </div>
+    )}
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import data from '@/data/site.json';
+const title = 'プライバシーポリシー';
+const description = 'NagahamaKaihin.comのアクセス解析、Cookie、個人情報の取り扱いに関する方針です。';
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="PRIVACY" title="プライバシーポリシー" text="このサイトにおけるアクセス情報と個人情報の取り扱いについてご案内します。" icon="valuables" />
+  <section class="section-space">
+    <article class="container-site max-w-4xl rounded-[2rem] border border-ink/10 bg-paper p-7 shadow-card sm:p-11">
+      <div class="space-y-10 text-sm leading-8 text-ink-soft">
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">1. 基本方針</h2><p class="mt-4">{data.site.domain}は、サイト利用者のプライバシーを尊重し、必要な範囲で取得される情報を適切に取り扱います。本サイトには会員登録、ログイン、投稿機能、問い合わせフォームはありません。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">2. アクセス解析</h2><p class="mt-4">利用状況の把握とサイト改善のため、Google Analytics 4を利用しています。Google AnalyticsはCookie等を使用し、閲覧ページ、利用端末、概算地域などの情報を収集する場合があります。取得される情報は、個人を直接特定する目的では使用しません。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">3. Cookie</h2><p class="mt-4">ブラウザの設定によりCookieを無効にできます。無効にしても本サイトの主な観光情報は閲覧できますが、アクセス解析の一部が機能しない場合があります。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">4. 外部送信</h2><p class="mt-4">アクセス解析のため、閲覧情報がGoogleへ送信される場合があります。本サイトは、広告配信、会員データベース、行動履歴に基づく独自の追跡機能を設けていません。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">5. 免責事項</h2><p class="mt-4">掲載内容の正確性に努めていますが、天候、交通、料金、営業時間、イベント予定などは変更される場合があります。利用者は現地の案内を確認し、自身の判断と責任で行動してください。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">6. 改定</h2><p class="mt-4">法令やサイト運営内容の変更に応じて、本方針を予告なく改定する場合があります。</p></section>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

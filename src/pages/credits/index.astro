@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Icon from '@/components/Icon.astro';
+const title = '写真・情報出典';
+const description = 'NagahamaKaihin.comで使用している写真素材のクレジットと、観光情報の確認元を掲載しています。';
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="CREDITS" title="写真と情報について" text="本サイトは、再利用が認められた写真素材と、公的機関・地域団体が公開する案内をもとに制作しています。" icon="waves" />
+  <section class="section-space">
+    <div class="container-site grid max-w-5xl gap-6">
+      <article class="soft-card p-7 sm:p-9">
+        <p class="text-xs font-bold tracking-[0.15em] text-sea-dark">PHOTO 01</p><h2 class="mt-3 font-serif text-2xl font-semibold">Nagahama Beach 2010</h2>
+        <p class="mt-4 text-sm leading-8 text-ink-soft">撮影：Batholith。Wikimedia Commonsで公開されている長浜海水浴場の写真で、原著作者によりパブリックドメインへ提供されています。サイト内では色調、トリミング、サイズを調整しています。</p>
+        <a class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sea-dark underline decoration-sea/50 underline-offset-4" href="https://commons.wikimedia.org/wiki/File:Nagahama_Beach_20100612.jpg" rel="noopener noreferrer" target="_blank">写真原ページ <Icon name="external" size={16} /></a>
+      </article>
+      <article class="soft-card p-7 sm:p-9">
+        <p class="text-xs font-bold tracking-[0.15em] text-sea-dark">PHOTO 02</p><h2 class="mt-3 font-serif text-2xl font-semibold">長浜海水浴場 2008</h2>
+        <p class="mt-4 text-sm leading-8 text-ink-soft">撮影：Aimaimyi。Wikimedia Commonsで公開されている長浜海水浴場の写真を、Creative Commons Attribution-ShareAlike 3.0の条件で使用し、色調、トリミング、サイズを調整しています。加工画像も同ライセンスで提供します。</p>
+        <div class="mt-5 flex flex-wrap gap-4"><a class="inline-flex items-center gap-2 text-sm font-bold text-sea-dark underline decoration-sea/50 underline-offset-4" href="https://commons.wikimedia.org/wiki/File:%E7%86%B1%E6%B5%B7%E5%B8%82%E9%95%B7%E6%B5%9C%E6%B5%B7%E6%B0%B4%E6%B5%B4%E5%A0%B4.jpg" rel="noopener noreferrer" target="_blank">写真原ページ <Icon name="external" size={16} /></a><a class="inline-flex items-center gap-2 text-sm font-bold text-sea-dark underline decoration-sea/50 underline-offset-4" href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener noreferrer" target="_blank">CC BY-SA 3.0 <Icon name="external" size={16} /></a></div>
+      </article>
+      <article class="soft-card p-7 sm:p-9">
+        <p class="text-xs font-bold tracking-[0.15em] text-coral">INFORMATION</p><h2 class="mt-3 font-serif text-2xl font-semibold">観光情報の確認元</h2>
+        <p class="mt-4 text-sm leading-8 text-ink-soft">熱海市、熱海市観光協会、多賀観光協会が公開する長浜海浜公園、長浜海水浴場、ながはま特設市の案内を中心に確認しています。情報の転載を目的とせず、旅行者が理解しやすい形に整理しています。</p>
+        <p class="mt-5 rounded-2xl bg-sand p-5 text-sm leading-7 text-ink-soft">本サイトは非公式ガイドです。海況、交通、イベント、営業状況は、現地掲示と係員の案内を優先してください。</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

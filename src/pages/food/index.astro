@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Icon from '@/components/Icon.astro';
+import data from '@/data/site.json';
+
+const title = '周辺ランチ';
+const description = '長浜海浜公園から歩いて行ける海鮮、そば、ラーメン、スイーツなど、伊豆多賀の周辺ランチを紹介します。';
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '長浜海浜公園 周辺ランチ',
+  itemListElement: data.restaurants.map((restaurant, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: restaurant.name
+  }))
+};
+---
+<BaseLayout title={title} description={description} schema={itemListSchema}>
+  <PageHero eyebrow="LOCAL LUNCH" title="海のあと、伊豆多賀の味へ。" text="長浜海浜公園の周辺には、地魚、手打ちそば、ラーメン、熱海らしいスイーツがあります。歩いて行ける店を、気分に合わせて選びましょう。" icon="food" image="/images/nagahama-summer.webp" imageAlt="長浜海水浴場の海辺" />
+
+  <section class="section-space">
+    <div class="container-site">
+      <SectionHeading eyebrow="WALKABLE PICKS" title="公園から歩ける5つの店" text="営業時間、定休日、売り切れは季節や当日の状況で変わります。出発前または現地で最新の営業案内を確認してください。" />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {data.restaurants.map((restaurant, index) => (
+          <article class:list={["soft-card flex flex-col p-7 sm:p-8", index === 0 && 'md:col-span-2 md:grid md:grid-cols-[auto_1fr_auto] md:items-start md:gap-7']}>
+            <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-coral-pale text-coral"><Icon name={restaurant.icon} size={27} /></span>
+            <div class={index === 0 ? '' : 'mt-6'}>
+              <div class="flex flex-wrap items-center gap-2"><span class="rounded-full bg-sea-pale px-3 py-1 text-xs font-bold text-sea-dark">{restaurant.category}</span><span class="rounded-full bg-sand px-3 py-1 text-xs font-bold text-ink-soft">{restaurant.distance}</span></div>
+              <h2 class="mt-4 font-serif text-2xl font-semibold">{restaurant.name}</h2>
+              <p class="mt-3 text-sm leading-7 text-ink-soft">{restaurant.description}</p>
+              <p class="mt-4 border-l-2 border-coral pl-4 text-xs leading-6 text-ink/60">{restaurant.note}</p>
+            </div>
+            {index === 0 && <span class="mt-6 rounded-full bg-ink px-4 py-2 text-center text-xs font-bold text-white md:mt-0">海辺のスイーツ</span>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
+      <div><SectionHeading eyebrow="HOW TO CHOOSE" title="今日の気分で選ぶ" text="海水浴のあと、静かな散歩の途中、子どもと一緒。目的ごとに選ぶと、店を決めやすくなります。" /></div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {[
+          ['fish','伊豆らしい魚を食べたい','みやこ食堂、民宿いなほ'],
+          ['soba','落ち着いた昼食にしたい','蕎麦処 多賀'],
+          ['ramen','しっかり食べたい','松福 長浜海岸店'],
+          ['pudding','甘いものと休憩','ドライブイン熱海プリン食堂']
+        ].map(([icon, title, pick]) => <article class="rounded-[1.5rem] border border-ink/10 bg-sand p-6"><Icon name={icon} size={25} class="text-sea-dark" /><h3 class="mt-4 font-serif text-lg font-semibold">{title}</h3><p class="mt-3 text-sm font-bold text-coral">{pick}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="container-site max-w-4xl">
+      <SectionHeading eyebrow="LOCAL MANNERS" title="海辺の店を気持ちよく利用するために" align="center" />
+      <div class="mt-9 grid gap-4 sm:grid-cols-3">
+        <article class="soft-card p-6 text-center"><Icon name="clock" size={26} class="mx-auto text-coral" /><h3 class="mt-4 font-bold">時間に余裕を</h3><p class="mt-2 text-sm leading-7 text-ink-soft">昼どきは待つことがあります。</p></article>
+        <article class="soft-card p-6 text-center"><Icon name="parking" size={26} class="mx-auto text-coral" /><h3 class="mt-4 font-bold">駐車待ちは避ける</h3><p class="mt-2 text-sm leading-7 text-ink-soft">店舗前の道路で待機しないようにしましょう。</p></article>
+        <article class="soft-card p-6 text-center"><Icon name="phone" size={26} class="mx-auto text-coral" /><h3 class="mt-4 font-bold">営業を確認</h3><p class="mt-2 text-sm leading-7 text-ink-soft">不定休や売り切れの場合があります。</p></article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

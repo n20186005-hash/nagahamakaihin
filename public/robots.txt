@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nagahamakaihin.com/sitemap-index.xml

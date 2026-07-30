@@ -1,0 +1,12 @@
+{
+  "name": "長浜海浜ガイド",
+  "short_name": "長浜海浜",
+  "description": "熱海・伊豆多賀の長浜海浜公園を訪れるための実用ガイド",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ea",
+  "theme_color": "#173f4b",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import data from '@/data/site.json';
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-ink/10 bg-ink text-white">
+  <div class="container-site grid gap-10 py-14 md:grid-cols-[1.2fr_.8fr_.8fr]">
+    <div>
+      <a href="/" class="inline-flex items-center gap-3">
+        <span class="grid h-11 w-11 place-items-center rounded-full bg-white/10"><Icon name="waves" size={23} /></span>
+        <span class="font-serif text-xl font-semibold tracking-[0.08em]">長浜海浜ガイド</span>
+      </a>
+      <p class="mt-5 max-w-md text-sm leading-7 text-white/70">熱海・伊豆多賀の海辺を、迷わず気持ちよく楽しむための非公式ローカルガイドです。お出かけ前に現地の案内をご確認ください。</p>
+    </div>
+    <div>
+      <p class="text-sm font-bold tracking-wider text-white/50">GUIDE</p>
+      <div class="mt-4 grid gap-3 text-sm">
+        <a class="hover:text-sea" href="/beach/">海水浴・設備</a>
+        <a class="hover:text-sea" href="/family/">子どもと遊ぶ</a>
+        <a class="hover:text-sea" href="/access/">アクセス・駐車場</a>
+        <a class="hover:text-sea" href="/food/">周辺ランチ</a>
+        <a class="hover:text-sea" href="/events/">イベント</a>
+      </div>
+    </div>
+    <div>
+      <p class="text-sm font-bold tracking-wider text-white/50">SITE</p>
+      <div class="mt-4 grid gap-3 text-sm">
+        <a class="hover:text-sea" href="/faq/">よくある質問</a>
+        <a class="hover:text-sea" href="/privacy/">プライバシーポリシー</a>
+        <a class="hover:text-sea" href="/credits/">写真・情報出典</a>
+        <a class="hover:text-sea" href={`tel:${data.site.phone.replaceAll('-', '')}`}><Icon name="phone" size={15} class="mr-1 inline" />多賀観光協会 {data.site.phone}</a>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="container-site flex flex-col gap-2 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} NagahamaKaihin.com</p>
+      <p>本サイトは長浜海浜公園・熱海市の公式サイトではありません。</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,72 @@
+---
+import Icon from './Icon.astro';
+import data from '@/data/site.json';
+
+interface Props { pathname?: string; }
+const { pathname = '/' } = Astro.props;
+const nav = [
+  { href: '/beach/', label: '海水浴' },
+  { href: '/family/', label: '子どもと遊ぶ' },
+  { href: '/access/', label: 'アクセス' },
+  { href: '/food/', label: '周辺ランチ' },
+  { href: '/events/', label: 'イベント' },
+  { href: '/faq/', label: 'よくある質問' },
+];
+---
+<header class="sticky top-0 z-50 border-b border-ink/10 bg-sand/90 backdrop-blur-xl">
+  <div class="container-site flex min-h-18 items-center justify-between gap-6 py-3">
+    <a href="/" class="group flex items-center gap-3" aria-label={`${data.site.name} トップ`}>
+      <span class="grid h-11 w-11 place-items-center rounded-full bg-ink text-white transition-transform group-hover:-rotate-6">
+        <Icon name="waves" size={23} />
+      </span>
+      <span>
+        <span class="block font-serif text-lg font-semibold tracking-[0.08em]">長浜海浜</span>
+        <span class="block text-[10px] font-bold uppercase tracking-[0.2em] text-sea-dark">Izu Taga · Atami</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-5 lg:flex" aria-label="メインナビゲーション">
+      {nav.map((item) => {
+        const active = pathname.startsWith(item.href);
+        return <a href={item.href} class:list={["relative py-2 text-sm font-bold transition-colors hover:text-sea-dark", active ? 'text-sea-dark' : 'text-ink-soft']} aria-current={active ? 'page' : undefined}>
+          {item.label}
+          {active && <span class="absolute inset-x-0 -bottom-1 mx-auto h-1 w-1 rounded-full bg-coral"></span>}
+        </a>
+      })}
+    </nav>
+
+    <div class="hidden lg:block">
+      <a href="/access/#route" class="button-primary min-h-11 px-5 text-sm">
+        <Icon name="map-pin" size={18} /> 行き方を見る
+      </a>
+    </div>
+
+    <button id="menu-button" class="grid h-11 w-11 place-items-center rounded-full border border-ink/15 bg-paper lg:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="メニューを開く">
+      <span class="menu-open"><Icon name="menu" size={22} /></span>
+      <span class="menu-close hidden"><Icon name="close" size={22} /></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-ink/10 bg-paper lg:hidden">
+    <nav class="container-site grid gap-1 py-4" aria-label="モバイルナビゲーション">
+      {nav.map((item) => <a href={item.href} class="flex items-center justify-between rounded-xl px-4 py-3 font-bold hover:bg-sea-pale">
+        {item.label}<Icon name="chevron" size={18} />
+      </a>)}
+      <a href="/access/#route" class="button-primary mt-3"><Icon name="map-pin" size={18} /> 行き方を見る</a>
+    </nav>
+  </div>
+</header>
+<script is:inline>
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const openIcon = menuButton?.querySelector('.menu-open');
+  const closeIcon = menuButton?.querySelector('.menu-close');
+  menuButton?.addEventListener('click', () => {
+    const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!expanded));
+    menuButton.setAttribute('aria-label', expanded ? 'メニューを開く' : 'メニューを閉じる');
+    mobileMenu?.classList.toggle('hidden', expanded);
+    openIcon?.classList.toggle('hidden', !expanded);
+    closeIcon?.classList.toggle('hidden', expanded);
+  });
+</script>

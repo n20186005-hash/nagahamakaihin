@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+---
+<div class="soft-card overflow-hidden">
+  <div class="sea-pattern border-b border-ink/10 p-5 sm:p-7">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <p class="text-xs font-bold tracking-[0.15em] text-sea-dark">ROUTE MAP</p>
+        <h3 class="mt-2 font-serif text-xl font-semibold">伊豆多賀駅から海へ</h3>
+      </div>
+      <span class="rounded-full bg-paper px-3 py-2 text-xs font-bold text-ink-soft">徒歩 約7〜10分</span>
+    </div>
+  </div>
+  <div class="p-5 sm:p-8">
+    <svg viewBox="0 0 760 330" role="img" aria-labelledby="route-title route-desc" class="h-auto w-full">
+      <title id="route-title">伊豆多賀駅から長浜海浜公園までの概略ルート</title>
+      <desc id="route-desc">山側の伊豆多賀駅から坂を下り、国道135号を渡って海辺の長浜海浜公園へ向かう概略図です。</desc>
+      <defs>
+        <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1.2" fill="#173f4b" opacity=".08" />
+        </pattern>
+      </defs>
+      <rect width="760" height="330" rx="28" fill="#fffdf8" />
+      <rect width="760" height="330" rx="28" fill="url(#dots)" />
+      <path d="M0 238 C105 215 170 268 260 238 S430 205 520 236 S655 270 760 230 V330 H0 Z" fill="#dbecec" />
+      <path d="M0 263 C90 240 168 290 256 261 S424 227 516 260 S658 292 760 251" fill="none" stroke="#73b6b8" stroke-width="5" stroke-linecap="round" />
+      <path d="M98 78 C160 86 208 110 260 142 C320 178 385 166 435 197 C487 229 540 221 620 248" fill="none" stroke="#d98262" stroke-width="7" stroke-linecap="round" stroke-dasharray="1 16" />
+      <path d="M97 78 C160 86 208 110 260 142 C320 178 385 166 435 197 C487 229 540 221 620 248" fill="none" stroke="#173f4b" stroke-width="2" stroke-linecap="round" opacity=".25" />
+      <g transform="translate(55 45)">
+        <rect width="125" height="64" rx="18" fill="#173f4b" />
+        <text x="62.5" y="27" text-anchor="middle" fill="white" font-size="13" font-weight="700">JR伊豆多賀駅</text>
+        <text x="62.5" y="47" text-anchor="middle" fill="#b9dfe0" font-size="11">山側からスタート</text>
+      </g>
+      <g transform="translate(276 116)">
+        <rect width="122" height="55" rx="16" fill="#f4ded4" />
+        <text x="61" y="24" text-anchor="middle" fill="#173f4b" font-size="12" font-weight="700">坂を海側へ</text>
+        <text x="61" y="41" text-anchor="middle" fill="#365b64" font-size="10">帰りは上り坂</text>
+      </g>
+      <g transform="translate(427 177)">
+        <rect width="118" height="48" rx="15" fill="#eadcc4" />
+        <text x="59" y="29" text-anchor="middle" fill="#173f4b" font-size="12" font-weight="700">国道135号</text>
+      </g>
+      <g transform="translate(575 216)">
+        <rect width="150" height="73" rx="20" fill="#397d82" />
+        <text x="75" y="27" text-anchor="middle" fill="white" font-size="13" font-weight="700">長浜海浜公園</text>
+        <text x="75" y="49" text-anchor="middle" fill="#dbecec" font-size="11">砂浜・芝生・遊具</text>
+      </g>
+      <circle cx="98" cy="78" r="11" fill="#d98262" stroke="white" stroke-width="5" />
+      <circle cx="620" cy="248" r="11" fill="#d98262" stroke="white" stroke-width="5" />
+      <path d="M700 290c12-12 25-12 38 0" fill="none" stroke="#73b6b8" stroke-width="4" stroke-linecap="round" />
+      <path d="M676 307c19-15 40-15 62 0" fill="none" stroke="#73b6b8" stroke-width="4" stroke-linecap="round" />
+    </svg>
+    <div class="mt-5 flex items-start gap-3 rounded-2xl bg-sand p-4 text-sm leading-7 text-ink-soft">
+      <span class="mt-0.5 text-coral"><Icon name="map-pin" size={20} /></span>
+      <p>この図は位置関係をわかりやすくした概略図です。駅から海側へ下るルートで、帰りは上り坂になります。</p>
+    </div>
+  </div>
+</div>

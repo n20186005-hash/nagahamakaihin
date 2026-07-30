@@ -1,0 +1,87 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Icon from '@/components/Icon.astro';
+import data from '@/data/site.json';
+
+const title = 'イベント';
+const description = '長浜海浜公園で開かれる伊豆多賀海上花火大会、ながはま特設市、季節の催しを紹介します。';
+const eventSchedule = [
+  { name: '伊豆多賀海上花火大会', startDate: '2026-08-12', endDate: '2026-08-12', description: data.events[0].description },
+  { name: 'ながはま特設市', startDate: '2026-09-12T09:00:00+09:00', endDate: '2026-09-13T15:00:00+09:00', description: data.events[1].description },
+  { name: 'ながはま特設市', startDate: '2026-09-19T09:00:00+09:00', endDate: '2026-09-23T15:00:00+09:00', description: data.events[2].description },
+  { name: 'ながはま特設市', startDate: '2026-10-10T09:00:00+09:00', endDate: '2026-10-12T15:00:00+09:00', description: data.events[3].description },
+  { name: 'ながはま特設市', startDate: '2026-10-24T09:00:00+09:00', endDate: '2026-10-25T15:00:00+09:00', description: data.events[3].description },
+  { name: 'ながはま特設市', startDate: '2026-10-31T09:00:00+09:00', endDate: '2026-11-03T15:00:00+09:00', description: data.events[3].description },
+];
+const eventSchemas = eventSchedule.map((event) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  ...event,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: {
+    '@type': 'Place',
+    name: '長浜海浜公園',
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: '静岡県',
+      addressLocality: '熱海市',
+      streetAddress: '上多賀地先',
+      addressCountry: 'JP'
+    }
+  }
+}));
+---
+<BaseLayout title={title} description={description} schema={eventSchemas}>
+  <PageHero eyebrow="SEASONAL EVENTS" title="海辺で、季節に出会う。" text="夏の海上花火、春と秋の特設市。観光だけでなく、南熱海の日常と地元の味に触れられる時間です。" icon="calendar" image="/images/nagahama-calm.webp" imageAlt="長浜海浜公園の穏やかな海辺" />
+
+  <section class="section-space">
+    <div class="container-site">
+      <SectionHeading eyebrow="2026 CALENDAR" title="2026年の主な予定" text="天候や運営状況により、開催内容、日時、会場が変更または中止になる場合があります。" />
+      <div class="mt-10 grid gap-5">
+        {data.events.map((event, index) => (
+          <article class="soft-card grid overflow-hidden md:grid-cols-[15rem_1fr_auto] md:items-center">
+            <div class:list={["p-6 text-center md:p-8", index === 0 ? 'bg-ink text-white' : 'bg-sea-pale']}>
+              <p class:list={["text-xs font-bold tracking-[0.15em]", index === 0 ? 'text-sea' : 'text-sea-dark']}>{event.type}</p>
+              <p class="mt-3 font-serif text-xl font-semibold">{event.date}</p>
+            </div>
+            <div class="p-6 md:p-8"><h2 class="font-serif text-2xl font-semibold">{event.title}</h2><p class="mt-3 text-sm leading-7 text-ink-soft">{event.description}</p></div>
+            <span class="mx-6 mb-6 inline-flex h-11 items-center justify-center rounded-full border border-ink/15 px-4 text-xs font-bold md:mx-8 md:mb-0">予定</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site grid gap-10 lg:grid-cols-2">
+      <div class="rounded-[2rem] bg-ink p-8 text-white sm:p-10">
+        <Icon name="sun" size={34} class="text-sea" />
+        <p class="mt-6 text-xs font-bold tracking-[0.16em] text-sea">SUMMER NIGHT</p><h2 class="mt-3 font-serif text-3xl font-semibold">伊豆多賀海上花火大会</h2>
+        <p class="mt-5 text-sm leading-8 text-white/70">海上から打ち上がる花火を、長浜の海辺で楽しむ夏の催し。会場周辺は混雑しやすいため、公共交通の利用と早めの到着がおすすめです。</p>
+        <div class="mt-7 grid gap-3 text-sm"><p class="flex items-center gap-3"><Icon name="calendar" size={19} class="text-coral" />2026年8月12日予定</p><p class="flex items-center gap-3"><Icon name="train" size={19} class="text-coral" />伊豆多賀駅から徒歩移動が安心</p><p class="flex items-center gap-3"><Icon name="valuables" size={19} class="text-coral" />帰りの切符・交通系ICを事前確認</p></div>
+      </div>
+      <div class="rounded-[2rem] border border-ink/10 bg-sand p-8 sm:p-10">
+        <Icon name="food" size={34} class="text-coral" />
+        <p class="mt-6 text-xs font-bold tracking-[0.16em] text-coral">LOCAL MARKET</p><h2 class="mt-3 font-serif text-3xl font-semibold">ながはま特設市</h2>
+        <p class="mt-5 text-sm leading-8 text-ink-soft">地場産品、海産物、飲食、フリーマーケットなどが並ぶ海辺の市。開催時間は9:00〜15:00予定で、天候により変更される場合があります。</p>
+        <div class="mt-7 rounded-2xl bg-paper p-5"><p class="text-sm font-bold">2026年の掲載予定</p><p class="mt-2 text-sm leading-7 text-ink-soft">9月12〜13日、9月19〜23日、10月10〜12日、10月24〜25日、10月31日〜11月3日</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="container-site max-w-5xl">
+      <SectionHeading eyebrow="EVENT TIPS" title="イベントの日に気をつけたいこと" align="center" />
+      <div class="mt-9 grid gap-4 md:grid-cols-3">
+        {[
+          ['train','公共交通を優先','駐車場や国道135号が混みやすくなります。'],
+          ['clock','早めに到着','開始直前ではなく、明るいうちの到着が安心です。'],
+          ['calendar','当日の案内を確認','荒天時の中止や時間変更に注意してください。']
+        ].map(([icon, name, text]) => <article class="soft-card p-7 text-center"><Icon name={icon} size={27} class="mx-auto text-sea-dark" /><h3 class="mt-4 font-serif text-lg font-semibold">{name}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p></article>)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

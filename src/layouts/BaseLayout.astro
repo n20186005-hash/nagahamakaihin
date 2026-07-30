@@ -1,0 +1,82 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import '@/styles/global.css';
+import data from '@/data/site.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  pathname?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title = data.site.name,
+  description = data.site.description,
+  image = '/images/og-nagahama.jpg',
+  pathname = Astro.url.pathname,
+  noindex = false,
+  schema,
+} = Astro.props;
+
+const pageTitle = title === data.site.name ? title : `${title}｜${data.site.name}`;
+const canonical = new URL(pathname, data.site.url).toString();
+const imageUrl = new URL(image, data.site.url).toString();
+const baseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: data.site.name,
+  url: data.site.url,
+  inLanguage: 'ja',
+  description: data.site.description,
+};
+const schemas = schema ? [baseSchema, ...(Array.isArray(schema) ? schema : [schema])] : [baseSchema];
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173f4b" />
+    <meta name="description" content={description} />
+    <meta name="format-detection" content="telephone=no" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content={data.site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <title>{pageTitle}</title>
+
+    {schemas.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
+
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${data.site.ga4}`}></script>
+    <script is:inline define:vars={{ measurementId: data.site.ga4 }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', measurementId);
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="fixed left-4 top-3 z-[100] -translate-y-20 rounded-full bg-ink px-4 py-2 text-sm font-bold text-white transition-transform focus:translate-y-0">本文へ移動</a>
+    <Header pathname={pathname} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

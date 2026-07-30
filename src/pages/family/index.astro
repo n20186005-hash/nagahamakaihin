@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import PlanSwitcher from '@/components/PlanSwitcher.astro';
+import Icon from '@/components/Icon.astro';
+import data from '@/data/site.json';
+
+const title = '子どもと遊ぶ';
+const description = '長浜海浜公園の大型遊具、芝生広場、トイレ、おむつ替え、親子での過ごし方と持ち物を紹介します。';
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="FAMILY DAY" title="海のそばで、思いきり遊ぶ。" text="砂浜だけでなく、芝生と海をテーマにした大型遊具がある長浜海浜公園。小さな子どもと一緒でも、予定を詰めすぎずゆっくり過ごせます。" icon="family" image="/images/nagahama-calm.webp" imageAlt="長浜海浜公園に隣接する砂浜と穏やかな海" />
+
+  <section class="section-space">
+    <div class="container-site grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+      <div>
+        <SectionHeading eyebrow="PLAYGROUND" title="海の物語が広がる大型遊具" text="海底都市、海賊船、くじらなどをイメージした遊具があり、年齢に合わせたエリアで遊べます。海辺らしい景色の中で、体を動かせるのが魅力です。" />
+        <div class="mt-7 grid gap-3 sm:grid-cols-2">
+          {['海をテーマにした大型遊具','幼児向けエリアあり','芝生で休憩しやすい','足洗い場を利用可能'].map((item) => <div class="flex items-center gap-3 rounded-2xl bg-paper p-4 shadow-card"><span class="text-coral"><Icon name="check" size={19} /></span><span class="text-sm font-bold">{item}</span></div>)}
+        </div>
+      </div>
+      <div class="sea-pattern rounded-[2rem] border border-ink/10 p-7 sm:p-10">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <article class="rounded-2xl bg-paper p-6"><Icon name="playground" size={30} class="text-sea-dark" /><h3 class="mt-4 font-serif text-xl font-semibold">遊具</h3><p class="mt-3 text-sm leading-7 text-ink-soft">遊具の表面は夏に熱くなることがあります。遊ぶ前に大人が確認しましょう。</p></article>
+          <article class="rounded-2xl bg-paper p-6"><Icon name="baby" size={30} class="text-sea-dark" /><h3 class="mt-4 font-serif text-xl font-semibold">乳幼児設備</h3><p class="mt-3 text-sm leading-7 text-ink-soft">多目的トイレとおむつ替えシートがあり、乳幼児連れでも利用しやすい環境です。</p></article>
+          <article class="rounded-2xl bg-paper p-6"><Icon name="park" size={30} class="text-sea-dark" /><h3 class="mt-4 font-serif text-xl font-semibold">芝生広場</h3><p class="mt-3 text-sm leading-7 text-ink-soft">レジャーシートを広げて休憩。風が強い日は荷物が飛ばないよう注意してください。</p></article>
+          <article class="rounded-2xl bg-paper p-6"><Icon name="waves" size={30} class="text-sea-dark" /><h3 class="mt-4 font-serif text-xl font-semibold">砂浜</h3><p class="mt-3 text-sm leading-7 text-ink-soft">海に入らない日も、波打ち際の散歩や砂遊びを楽しめます。</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site">
+      <SectionHeading eyebrow="PACKING LIST" title="親子で持って行くと便利なもの" text="海水浴をしない日でも、着替えとタオルがあると安心です。" align="center" />
+      <div class="mx-auto mt-9 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          ['sun','帽子・日焼け止め','海辺は照り返しが強いため、季節を問わず日差し対策を。'],
+          ['waves','タオル・着替え','砂遊びや足を水につけるだけでも服が濡れることがあります。'],
+          ['food','飲み物・軽食','混雑時に備えて飲み物を持参。ごみは持ち帰りましょう。'],
+          ['park','レジャーシート','芝生で休むときに便利。風で飛ばないよう固定を。'],
+          ['baby','子ども用サンダル','砂や路面の熱さから足を守れる履き物が安心です。'],
+          ['valuables','小銭・防水袋','ロッカーや温水シャワー用の現金、濡れ物用の袋を準備。']
+        ].map(([icon, name, text]) => <article class="soft-card p-6"><Icon name={icon} size={26} class="text-coral" /><h3 class="mt-4 font-serif text-lg font-semibold">{name}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="container-site">
+      <SectionHeading eyebrow="HALF-DAY PLAN" title="家族に合った過ごし方" text="混雑や子どもの体調に合わせて、いつでも短くできる余白のあるプランです。" />
+      <PlanSwitcher />
+    </div>
+  </section>
+
+  <section class="pb-16 sm:pb-24">
+    <div class="container-site rounded-[2rem] bg-coral-pale p-8 sm:p-11">
+      <div class="grid gap-7 md:grid-cols-[1fr_auto] md:items-center"><div><h2 class="font-serif text-2xl font-semibold">お昼ごはんも歩いて行けます</h2><p class="mt-3 text-sm leading-7 text-ink-soft">海鮮、ラーメン、そば、スイーツ。子どもの気分に合わせて選べる店があります。</p></div><a href="/food/" class="button-primary">周辺ランチを見る <Icon name="arrow" size={18} /></a></div>
+    </div>
+  </section>
+</BaseLayout>

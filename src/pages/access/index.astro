@@ -1,0 +1,87 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import AccessDiagram from '@/components/AccessDiagram.astro';
+import Icon from '@/components/Icon.astro';
+import data from '@/data/site.json';
+
+const title = 'アクセス・駐車場';
+const description = '長浜海浜公園への電車、バス、車でのアクセス、伊豆多賀駅からの徒歩ルート、夏季駐車場の案内です。';
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="ACCESS" title="駅から歩いて、海へ。" text="JR伊豆多賀駅から徒歩約7〜10分。熱海駅からのバスや、国道135号を使う車でのアクセスも便利です。夏季は混雑を見込んで、余裕を持って移動しましょう。" icon="map-pin" />
+
+  <section id="route" class="section-space">
+    <div class="container-site grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-start">
+      <div>
+        <SectionHeading eyebrow="BY TRAIN" title="電車なら伊豆多賀駅へ" text="熱海駅からJR伊東線で約10分。駅からは海側へ坂を下り、長浜海浜公園まで徒歩約7〜10分です。" />
+        <ol class="mt-8 grid gap-4">
+          {data.access[0].steps.map((step, index) => <li class="flex items-start gap-4 rounded-2xl bg-paper p-5 shadow-card"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink font-serif text-sm text-white">{index + 1}</span><p class="pt-1 text-sm font-bold leading-7">{step}</p></li>)}
+        </ol>
+        <div class="mt-6 rounded-2xl bg-coral-pale p-5"><p class="text-sm leading-7 text-ink-soft"><strong class="text-ink">帰りは上り坂です。</strong> 小さな子ども連れ、大きな荷物がある場合は、歩く時間を長めに見てください。</p></div>
+      </div>
+      <AccessDiagram />
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site">
+      <SectionHeading eyebrow="CHOOSE YOUR ROUTE" title="バスと車での行き方" text="同行者や荷物の量に合わせて、無理のない移動方法を選びましょう。" align="center" />
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        <article class="soft-card p-7 sm:p-9">
+          <span class="grid h-14 w-14 place-items-center rounded-full bg-sea-pale text-sea-dark"><Icon name="bus" size={28} /></span>
+          <p class="mt-6 text-xs font-bold tracking-wider text-sea-dark">BY BUS</p><h2 class="mt-2 font-serif text-2xl font-semibold">「長浜」バス停からすぐ</h2>
+          <p class="body-copy mt-4 text-sm">熱海駅から網代方面行きのバスに乗り、「長浜」で下車。国道135号沿いで、公園はバス停のすぐ近くです。</p>
+          <p class="mt-5 rounded-2xl bg-sand p-4 text-sm leading-7 text-ink-soft">季節や曜日により時刻が変わるため、当日の案内表示で発車時刻を確認してください。</p>
+        </article>
+        <article class="soft-card p-7 sm:p-9">
+          <span class="grid h-14 w-14 place-items-center rounded-full bg-coral-pale text-coral"><Icon name="car" size={28} /></span>
+          <p class="mt-6 text-xs font-bold tracking-wider text-coral">BY CAR</p><h2 class="mt-2 font-serif text-2xl font-semibold">国道135号を南へ</h2>
+          <p class="body-copy mt-4 text-sm">熱海市街から伊東・網代方面へ。通常は約10〜20分ですが、夏季、週末、花火大会日は渋滞しやすくなります。</p>
+          <p class="mt-5 rounded-2xl bg-sand p-4 text-sm leading-7 text-ink-soft">海水浴期間は約350台、普通車1台1,000円、利用時間9:00〜16:00の案内です。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="container-site grid gap-10 lg:grid-cols-[.85fr_1.15fr]">
+      <div><SectionHeading eyebrow="PARKING TIPS" title="夏の駐車は、早めの到着が安心" text="海水浴シーズンは午前中から車が集中します。とくに週末や連休は、到着時間と帰りの渋滞を見込んで計画してください。" /></div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {[
+          ['clock','9時前後を目安に','混雑日ほど、海水浴場の開設時間に合わせた到着が安心です。'],
+          ['parking','店舗前で待たない','周辺店の駐車場は小規模です。道路上での待機や駐車待ちは避けましょう。'],
+          ['calendar','イベント日を確認','花火大会や特設市の日は、通常より交通が集中します。'],
+          ['train','公共交通も選択肢','荷物が少ない日は、伊豆多賀駅から歩くと駐車の心配がありません。']
+        ].map(([icon, name, text]) => <article class="soft-card p-6"><Icon name={icon} size={25} class="text-sea-dark" /><h3 class="mt-4 font-serif text-lg font-semibold">{name}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16 sm:pb-24">
+    <div class="container-site overflow-hidden rounded-[2rem] bg-ink text-white shadow-soft">
+      <div class="grid lg:grid-cols-[.82fr_1.18fr]">
+        <div class="flex flex-col justify-center p-8 sm:p-11">
+          <p class="text-xs font-bold tracking-wider text-sea">DESTINATION</p>
+          <h2 class="mt-3 font-serif text-2xl font-semibold">長浜海浜公園</h2>
+          <p class="mt-3 text-sm leading-7 text-white/70">{data.site.address}<br />緯度 {data.site.latitude} ／ 経度 {data.site.longitude}</p>
+          <a href={`tel:${data.site.phone.replaceAll('-', '')}`} class="button-primary mt-7 self-start bg-white text-ink shadow-none"><Icon name="phone" size={18} /> 多賀観光協会へ電話</a>
+        </div>
+        <div class="aspect-[4/3] min-h-[340px] w-full sm:aspect-[16/10] lg:aspect-auto">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3266.022154586453!2d139.0690894!3d35.0561852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019bfbd82469b5f%3A0x6a5c7bb71758082f!2sNagahama%20Seaside%20Park!5e0!3m2!1sja!2sjp!4v1785391126575!5m2!1sja!2sjp"
+            title="長浜海浜公園のGoogleマップ"
+            width="600"
+            height="450"
+            class="size-full"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

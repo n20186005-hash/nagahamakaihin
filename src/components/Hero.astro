@@ -1,0 +1,40 @@
+---
+import Icon from './Icon.astro';
+import data from '@/data/site.json';
+---
+<section class="wave-divider relative isolate min-h-[78svh] overflow-hidden bg-ink text-white">
+  <img src="/images/nagahama-hero.webp" width="1920" height="1080" alt="山に囲まれた長浜海水浴場の砂浜と穏やかな海" class="absolute inset-0 -z-20 h-full w-full object-cover object-center" fetchpriority="high" />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink/95 via-ink/62 to-ink/15"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/70 via-transparent to-transparent"></div>
+
+  <div class="container-site grid min-h-[78svh] items-center gap-10 py-24 md:grid-cols-[1fr_auto]">
+    <div class="max-w-3xl pt-8">
+      <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold tracking-[0.15em] backdrop-blur-md">
+        <span class="h-2 w-2 rounded-full bg-coral"></span> ATAMI · IZU TAGA
+      </p>
+      <h1 class="display-title text-balance">海と芝生で、<br />ゆっくり過ごす。</h1>
+      <p class="mt-6 max-w-2xl text-base leading-8 text-white/82 md:text-lg">約400mの砂浜、海辺の芝生、大型遊具。熱海の中心部から少し離れた長浜海浜公園で、家族にも、ひとり旅にも、ちょうどいい一日を。</p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="#season" class="button-primary bg-white text-ink shadow-none hover:bg-sand">
+          2026年 夏季案内 <Icon name="arrow" size={19} />
+        </a>
+        <a href="/access/" class="button-secondary border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20">
+          <Icon name="map-pin" size={19} /> アクセスを見る
+        </a>
+      </div>
+      <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-sm text-white/75">
+        <span class="inline-flex items-center gap-2"><Icon name="train" size={18} /> 伊豆多賀駅から徒歩約7〜10分</span>
+        <span class="inline-flex items-center gap-2"><Icon name="parking" size={18} /> 駐車場あり</span>
+        <span class="inline-flex items-center gap-2"><Icon name="family" size={18} /> 大型遊具あり</span>
+      </div>
+    </div>
+    <div class="hidden self-stretch items-center pr-2 md:flex">
+      <div class="vertical-label rounded-full border border-white/20 bg-white/10 px-4 py-7 font-serif text-sm tracking-[0.22em] text-white/80 backdrop-blur-md">南熱海・上多賀</div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-13 right-6 hidden max-w-xs rounded-2xl border border-white/20 bg-ink/60 p-4 text-xs leading-6 text-white/70 backdrop-blur-md xl:block">
+    <p class="font-bold text-white">長浜海浜公園</p>
+    <p>{data.site.address}</p>
+  </div>
+</section>

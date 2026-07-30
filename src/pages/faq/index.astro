@@ -1,0 +1,30 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import FaqList from '@/components/FaqList.astro';
+import Icon from '@/components/Icon.astro';
+import data from '@/data/site.json';
+
+const title = 'よくある質問';
+const description = '長浜海浜公園の料金、駐車場、海水浴期間、シャワー、遊具、ペット、花火、アクセスに関するよくある質問です。';
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: data.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer }
+  }))
+};
+---
+<BaseLayout title={title} description={description} schema={faqSchema}>
+  <PageHero eyebrow="FAQ" title="お出かけ前の、よくある質問。" text="駐車場、海水浴、シャワー、遊具、ペット、アクセス。長浜へ行く前に気になることをまとめました。" icon="check" />
+  <section class="section-space">
+    <div class="container-site max-w-4xl">
+      <FaqList />
+      <div class="mt-8 rounded-[1.5rem] bg-coral-pale p-6 sm:p-8">
+        <div class="flex items-start gap-4"><span class="text-coral"><Icon name="calendar" size={24} /></span><div><h2 class="font-bold">季節情報は変わることがあります</h2><p class="mt-2 text-sm leading-7 text-ink-soft">荒天、設備点検、イベント運営などにより変更される場合は、現地の掲示と係員の案内を優先してください。</p></div></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

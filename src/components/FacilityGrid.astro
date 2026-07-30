@@ -1,0 +1,13 @@
+---
+import Icon from './Icon.astro';
+import data from '@/data/site.json';
+---
+<div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+  {data.facilities.map((item) => (
+    <div class="soft-card p-5">
+      <span class="grid h-11 w-11 place-items-center rounded-full bg-sea-pale text-sea-dark"><Icon name={item.icon} size={22} /></span>
+      <p class="mt-4 text-sm font-bold">{item.label}</p>
+      <p class="mt-1 text-sm leading-6 text-ink-soft">{item.value}</p>
+    </div>
+  ))}
+</div>

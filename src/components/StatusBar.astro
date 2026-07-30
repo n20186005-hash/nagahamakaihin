@@ -1,0 +1,50 @@
+---
+import Icon from './Icon.astro';
+import data from '@/data/site.json';
+---
+<section id="season" class="relative z-10 -mt-4 pb-8">
+  <div class="container-site">
+    <div class="grid overflow-hidden rounded-[1.75rem] border border-ink/10 bg-paper shadow-soft lg:grid-cols-[1.3fr_repeat(3,1fr)]">
+      <div class="bg-ink p-6 text-white sm:p-7">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-bold tracking-[0.16em] text-sea">2026 BEACH SEASON</p>
+            <p id="season-status" class="mt-2 text-xl font-bold" aria-live="polite">夏季営業情報を確認中</p>
+            <p class="mt-2 text-sm text-white/65">{data.season.start.replaceAll('-', '.')} — {data.season.end.replaceAll('-', '.')}</p>
+          </div>
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/10"><Icon name="sun" size={24} /></span>
+        </div>
+      </div>
+      <div class="border-b border-ink/10 p-6 lg:border-b-0 lg:border-r">
+        <p class="text-xs font-bold tracking-wider text-ink/45">OPEN</p>
+        <p class="mt-2 font-serif text-2xl font-semibold">{data.season.hours}</p>
+        <p class="mt-2 text-sm text-ink-soft">監視員常駐</p>
+      </div>
+      <div class="border-b border-ink/10 p-6 lg:border-b-0 lg:border-r">
+        <p class="text-xs font-bold tracking-wider text-ink/45">PARKING</p>
+        <p class="mt-2 font-serif text-2xl font-semibold">1,000円</p>
+        <p class="mt-2 text-sm text-ink-soft">普通車1台・約350台</p>
+      </div>
+      <div class="p-6">
+        <p class="text-xs font-bold tracking-wider text-ink/45">SHOWER</p>
+        <p class="mt-2 font-serif text-2xl font-semibold">冷水 無料</p>
+        <p class="mt-2 text-sm text-ink-soft">温水はコイン式</p>
+      </div>
+    </div>
+    <p class="mt-3 px-2 text-xs leading-6 text-ink/55">荒天時や現地状況により変更される場合があります。監視所の旗と係員の案内を優先してください。</p>
+  </div>
+</section>
+<script is:inline define:vars={{ startDate: data.season.start, endDate: data.season.end }}>
+  const status = document.getElementById('season-status');
+  const today = new Intl.DateTimeFormat('sv-SE', {
+    timeZone: 'Asia/Tokyo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date());
+  if (status) {
+    if (today < startDate) status.textContent = '海水浴場は開設前です';
+    else if (today <= endDate) status.textContent = '海水浴場 開設期間中';
+    else status.textContent = '2026年の夏季営業は終了';
+  }
+</script>

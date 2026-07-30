@@ -1,0 +1,99 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import FacilityGrid from '@/components/FacilityGrid.astro';
+import Icon from '@/components/Icon.astro';
+import data from '@/data/site.json';
+
+const title = '海水浴・設備';
+const description = '長浜海水浴場の2026年開設期間、監視時間、駐車料金、シャワー、更衣室、ロッカー、利用ルールをまとめています。';
+const beachSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Beach',
+  name: '長浜海水浴場',
+  description,
+  url: `${data.site.url}/beach/`,
+  image: `${data.site.url}/images/nagahama-summer.webp`,
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: '静岡県',
+    addressLocality: '熱海市',
+    streetAddress: '上多賀地先',
+    addressCountry: 'JP'
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: data.site.latitude,
+    longitude: data.site.longitude
+  },
+  isAccessibleForFree: true
+};
+const seasonRows = [
+  ['開設期間', `${data.season.start.replaceAll('-', '.')}〜${data.season.end.replaceAll('-', '.')}`],
+  ['監視時間', data.season.hours],
+  ['駐車場', data.season.parking],
+  ['駐車場利用時間', data.season.parkingHours],
+  ['屋外冷水シャワー', data.season.coldShower],
+  ['温水シャワー', data.season.hotShower],
+  ['更衣室', data.season.changingRoom],
+  ['コインロッカー', data.season.lockers],
+  ['日中の飲食', data.season.restaurant],
+  ['夜間フードコート', data.season.foodCourt],
+];
+---
+<BaseLayout title={title} description={description} schema={beachSchema}>
+  <PageHero eyebrow="BEACH GUIDE" title="海に入る前に、知っておきたいこと。" text="長浜海水浴場は、約400mの砂浜と比較的穏やかな海が魅力。夏季の設備、料金、ルールを先に確認して、気持ちよく一日を過ごしましょう。" icon="sun" image="/images/nagahama-summer.webp" imageAlt="長浜海水浴場の砂浜と穏やかな海" />
+
+  <section class="section-space">
+    <div class="container-site grid gap-10 lg:grid-cols-[1.05fr_.95fr]">
+      <div>
+        <SectionHeading eyebrow="2026 SEASON" title="2026年の海水浴場案内" text="現地の天候や海況により、遊泳可否や設備の運用が変わることがあります。監視所の旗と係員の案内を優先してください。" />
+        <dl class="mt-8 overflow-hidden rounded-[1.5rem] border border-ink/10 bg-paper shadow-card">
+          {seasonRows.map(([label, value], index) => (
+            <div class:list={["grid gap-2 px-5 py-4 sm:grid-cols-[11rem_1fr] sm:px-7", index !== seasonRows.length - 1 && 'border-b border-ink/10']}>
+              <dt class="text-sm font-bold text-ink/55">{label}</dt>
+              <dd class="font-bold">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <aside class="self-start rounded-[2rem] bg-ink p-7 text-white sm:p-9 lg:sticky lg:top-28">
+        <p class="text-xs font-bold tracking-[0.16em] text-sea">FLAG CHECK</p>
+        <h2 class="mt-4 font-serif text-2xl font-semibold">監視所の旗を確認</h2>
+        <div class="mt-6 grid gap-3">
+          <div class="flex items-center gap-4 rounded-2xl bg-white/[0.06] p-4"><span class="h-8 w-8 shrink-0 rounded-md bg-sky-500"></span><div><p class="font-bold">青旗</p><p class="mt-1 text-sm text-white/65">遊泳できます</p></div></div>
+          <div class="flex items-center gap-4 rounded-2xl bg-white/[0.06] p-4"><span class="h-8 w-8 shrink-0 rounded-md bg-yellow-400"></span><div><p class="font-bold">黄旗</p><p class="mt-1 text-sm text-white/65">注意して遊泳</p></div></div>
+          <div class="flex items-center gap-4 rounded-2xl bg-white/[0.06] p-4"><span class="h-8 w-8 shrink-0 rounded-md bg-red-500"></span><div><p class="font-bold">赤旗</p><p class="mt-1 text-sm text-white/65">遊泳禁止</p></div></div>
+          <div class="flex items-center gap-4 rounded-2xl bg-white/[0.06] p-4"><span class="grid h-8 w-8 shrink-0 grid-cols-2 overflow-hidden rounded-md"><i class="bg-red-500"></i><i class="bg-white"></i></span><div><p class="font-bold">赤白旗</p><p class="mt-1 text-sm text-white/65">緊急避難の合図</p></div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site">
+      <SectionHeading eyebrow="FACILITIES" title="海辺で使える設備" text="着替え、シャワー、ロッカー、トイレなど、家族で利用しやすい設備がまとまっています。" align="center" />
+      <div class="mx-auto mt-10 max-w-5xl"><FacilityGrid /></div>
+      <div class="mx-auto mt-8 grid max-w-5xl gap-4 md:grid-cols-3">
+        <article class="soft-card p-6"><Icon name="shower" size={28} class="text-sea-dark" /><h3 class="mt-4 font-serif text-xl font-semibold">シャワー</h3><p class="mt-3 text-sm leading-7 text-ink-soft">屋外冷水シャワーは無料。温水は「うみえ〜る長浜」内のコイン式設備を利用します。</p></article>
+        <article class="soft-card p-6"><Icon name="locker" size={28} class="text-sea-dark" /><h3 class="mt-4 font-serif text-xl font-semibold">ロッカー</h3><p class="mt-3 text-sm leading-7 text-ink-soft">300円・500円。現金のみの案内です。小銭を用意しておくとスムーズです。</p></article>
+        <article class="soft-card p-6"><Icon name="toilet" size={28} class="text-sea-dark" /><h3 class="mt-4 font-serif text-xl font-semibold">トイレ</h3><p class="mt-3 text-sm leading-7 text-ink-soft">多目的トイレとおむつ替えシートがあります。小さな子ども連れにも便利です。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="container-site">
+      <SectionHeading eyebrow="BEACH RULES" title="安全に楽しむためのルール" text="長浜の海と公園を、みんなが気持ちよく使うための大切な案内です。" />
+      <div class="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {data.rules.map((rule) => (
+          <article class="soft-card p-6"><span class="grid h-12 w-12 place-items-center rounded-full bg-coral-pale text-coral"><Icon name={rule.icon} size={24} /></span><h3 class="mt-5 font-serif text-lg font-semibold">{rule.title}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{rule.text}</p></article>
+        ))}
+      </div>
+      <div class="mt-8 rounded-[1.5rem] border border-coral/25 bg-coral-pale/60 p-6 sm:p-8">
+        <div class="flex items-start gap-4"><span class="mt-0.5 text-coral"><Icon name="sun" size={24} /></span><div><h3 class="font-bold">日差しと熱中症に注意</h3><p class="mt-2 text-sm leading-7 text-ink-soft">日陰が限られる時間帯があります。帽子、日焼け止め、飲み物、羽織りものを準備し、こまめに休憩してください。</p></div></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
