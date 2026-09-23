@@ -1,0 +1,36 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import data from '@/data/site.json';
+---
+<section class="section-space bg-paper">
+  <div class="container-site">
+    <SectionHeading eyebrow="ITINERARIES" title="旅の構成別・所要時間別プラン" text="同行者の構成や体力、滞在時間に合わせて選べるプランです。目安の時刻はあくまで一例です。" />
+    <h3 class="mt-10 text-sm font-bold tracking-wider text-sea-dark">旅の構成別</h3>
+    <div class="mt-5 grid gap-4 lg:grid-cols-3">
+      {data.itineraries.audience.map((p) => (
+        <article class="soft-card overflow-hidden">
+          <div class="sea-pattern p-6"><span class="grid h-12 w-12 place-items-center rounded-full bg-paper text-sea-dark shadow-card"><Icon name={p.icon} size={24} /></span><h4 class="mt-4 font-serif text-lg font-semibold">{p.label}</h4></div>
+          <ol class="grid gap-3 p-6">
+            {p.items.map((it) => (
+              <li class="flex gap-3"><span class="mt-0.5 inline-grid h-7 w-12 shrink-0 place-items-center rounded-full bg-coral-pale text-xs font-bold text-coral">{it.time}</span><div><p class="text-sm font-bold">{it.title}</p><p class="text-sm leading-6 text-ink-soft">{it.text}</p></div></li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </div>
+    <h3 class="mt-10 text-sm font-bold tracking-wider text-sea-dark">所要時間別</h3>
+    <div class="mt-5 grid gap-4 md:grid-cols-2">
+      {data.itineraries.general.map((p) => (
+        <article class="soft-card overflow-hidden">
+          <div class="sea-pattern p-6"><span class="grid h-12 w-12 place-items-center rounded-full bg-paper text-sea-dark shadow-card"><Icon name={p.icon} size={24} /></span><h4 class="mt-4 font-serif text-lg font-semibold">{p.label}</h4></div>
+          <ol class="grid gap-3 p-6">
+            {p.items.map((it) => (
+              <li class="flex gap-3"><span class="mt-0.5 inline-grid h-7 w-12 shrink-0 place-items-center rounded-full bg-coral-pale text-xs font-bold text-coral">{it.time}</span><div><p class="text-sm font-bold">{it.title}</p><p class="text-sm leading-6 text-ink-soft">{it.text}</p></div></li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

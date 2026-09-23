@@ -1,0 +1,23 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import data from '@/data/site.json';
+---
+<section class="section-space">
+  <div class="container-site">
+    <SectionHeading eyebrow="SEASONAL STRATEGY" title="季節ごとの過ごし方" text="気象庁の平年値（1991–2020）を参考にした目安です。海況や気温は年によって異なりますので、現地の案内をあわせてご確認ください。" />
+    <div class="mt-10 grid gap-4 md:grid-cols-2">
+      {data.seasonal.map((s) => (
+        <article class="soft-card p-7">
+          <h3 class="font-serif text-xl font-semibold">{s.season}</h3>
+          <dl class="mt-5 grid gap-4 text-sm">
+            <div><dt class="font-bold text-sea-dark">気象</dt><dd class="mt-1 leading-7 text-ink-soft">{s.climate}</dd></div>
+            <div><dt class="font-bold text-sea-dark">海・水辺</dt><dd class="mt-1 leading-7 text-ink-soft">{s.sea}</dd></div>
+            <div><dt class="font-bold text-sea-dark">生物・自然</dt><dd class="mt-1 leading-7 text-ink-soft">{s.wildlife}</dd></div>
+          </dl>
+          <p class="mt-5 rounded-2xl bg-sand px-4 py-3 text-sm leading-7 text-ink-soft"><span class="font-bold">おすすめ：</span>{s.tip}</p>
+        </article>
+      ))}
+    </div>
+    <p class="mt-6 text-xs text-ink/55">数値は目安であり、気象庁の平年気候値をもとにした常年傾向です。実際の海開きや設備の状況は現地発表によります。</p>
+  </div>
+</section>

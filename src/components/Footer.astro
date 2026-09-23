@@ -28,6 +28,7 @@ const year = new Date().getFullYear();
         <a class="hover:text-sea" href="/faq/">よくある質問</a>
         <a class="hover:text-sea" href="/privacy/">プライバシーポリシー</a>
         <a class="hover:text-sea" href="/credits/">写真・情報出典</a>
+        <a class="hover:text-sea" href={data.entity.govtTourismUrl} target="_blank" rel="noopener noreferrer">{data.entity.govtTourismName}</a>
         <a class="hover:text-sea" href={`tel:${data.site.phone.replaceAll('-', '')}`}><Icon name="phone" size={15} class="mr-1 inline" />多賀観光協会 {data.site.phone}</a>
       </div>
     </div>

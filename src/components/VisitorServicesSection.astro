@@ -1,0 +1,27 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import FacilityGrid from './FacilityGrid.astro';
+import Icon from './Icon.astro';
+import data from '@/data/site.json';
+
+const notes = [
+  { icon: 'food', title: '飲食', text: '夏季は施設内で軽食・飲料を扱うほか、周辺には海鮮・そば・ラーメンなど様々なタイプの飲食店があります。営業日は季節により変わりやすいです。' },
+  { icon: 'bed', title: '宿泊', text: '周辺には旅館やホテルなど、滞在スタイルの異なる宿泊施設が点在します。海水浴シーズンは早めの予約がおすすめです。' },
+  { icon: 'store', title: '商超・売店', text: '駅前にはコンビニエンスストアなどの買い物スポットがあり、飲料や日用品の補充に便利です。' },
+  { icon: 'plug', title: 'EV充電', text: '周辺には電気自動車の充電スポットがあります。車での滞在計画にご活用ください。' },
+];
+---
+<section class="section-space bg-paper">
+  <div class="container-site">
+    <SectionHeading eyebrow="VISITOR SERVICES" title="訪客サービスと周辺施設" text="公園内の設備と、周辺で利用できる施設のタイプをまとめました。特定の店舗名は挙げず、過ごしやすい選び方の目安としてご紹介します。" />
+    <div class="mt-10"><FacilityGrid /></div>
+    <div class="mt-10 grid gap-4 md:grid-cols-2">
+      {notes.map((n) => (
+        <div class="soft-card flex gap-4 p-6">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-sea-pale text-sea-dark"><Icon name={n.icon} size={24} /></span>
+          <div><h3 class="font-serif text-lg font-semibold">{n.title}</h3><p class="mt-2 text-sm leading-7 text-ink-soft">{n.text}</p></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

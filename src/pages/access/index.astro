@@ -46,6 +46,35 @@ const description = '長浜海浜公園への電車、バス、車でのアク�
   </section>
 
   <section class="section-space">
+    <div class="container-site grid gap-10 lg:grid-cols-2">
+      <div>
+        <SectionHeading eyebrow={data.transportAirport.eyebrow} title={data.transportAirport.title} text={data.transportAirport.text} />
+        <ol class="mt-8 grid gap-4">
+          {data.transportAirport.steps.map((step) => (
+            <li class="flex items-start gap-4 rounded-2xl bg-paper p-5 shadow-card">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-white"><Icon name={step.icon} size={18} /></span>
+              <div><p class="text-sm font-bold">{step.headline}</p><p class="mt-1 text-sm leading-7 text-ink-soft">{step.text}</p></div>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-5 rounded-2xl bg-sand p-4 text-sm leading-7 text-ink-soft">{data.transportAirport.note}</p>
+      </div>
+      <div>
+        <SectionHeading eyebrow={data.transportTaxi.eyebrow} title={data.transportTaxi.title} text={data.transportTaxi.text} />
+        <ol class="mt-8 grid gap-4">
+          {data.transportTaxi.steps.map((step) => (
+            <li class="flex items-start gap-4 rounded-2xl bg-paper p-5 shadow-card">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-white"><Icon name={step.icon} size={18} /></span>
+              <div><p class="text-sm font-bold">{step.headline}</p><p class="mt-1 text-sm leading-7 text-ink-soft">{step.text}</p></div>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-5 rounded-2xl bg-sand p-4 text-sm leading-7 text-ink-soft">{data.transportTaxi.note}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
     <div class="container-site grid gap-10 lg:grid-cols-[.85fr_1.15fr]">
       <div><SectionHeading eyebrow="PARKING TIPS" title="夏の駐車は、早めの到着が安心" text="海水浴シーズンは午前中から車が集中します。とくに週末や連休は、到着時間と帰りの渋滞を見込んで計画してください。" /></div>
       <div class="grid gap-4 sm:grid-cols-2">

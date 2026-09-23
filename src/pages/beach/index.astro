@@ -6,17 +6,22 @@ import FacilityGrid from '@/components/FacilityGrid.astro';
 import Icon from '@/components/Icon.astro';
 import data from '@/data/site.json';
 
-const title = '海水浴・設備';
-const description = '長浜海水浴場の2026年開設期間、監視時間、駐車料金、シャワー、更衣室、ロッカー、利用ルールをまとめています。';
+const title = '長浜海水浴場 駐車場・シャワー・更衣室';
+const description = '長浜海水浴場（熱海）の2026年開設期間と監視時間、駐車場（約350台・普通車1台1,000円）の料金と混雑目安、シャワー・更衣室・コインロッカーの設備、遊泳禁止の目印となる監視旗をまとめています。';
 const beachSchema = {
   '@context': 'https://schema.org',
   '@type': 'Beach',
   name: '長浜海水浴場',
+  alternateName: ['長浜海浜公園', 'うみえ〜る長浜', 'Nagahama Beach'],
   description,
   url: `${data.site.url}/beach/`,
   image: `${data.site.url}/images/nagahama-summer.webp`,
+  telephone: data.entity.phone,
+  hasMap: data.entity.mapsShareUrl,
+  sameAs: [data.entity.mapsShareUrl, data.entity.govtTourismUrl],
   address: {
     '@type': 'PostalAddress',
+    postalCode: data.entity.postalCode,
     addressRegion: '静岡県',
     addressLocality: '熱海市',
     streetAddress: '上多賀地先',
@@ -27,7 +32,22 @@ const beachSchema = {
     latitude: data.site.latitude,
     longitude: data.site.longitude
   },
-  isAccessibleForFree: true
+  isAccessibleForFree: true,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: data.entity.rating,
+    reviewCount: data.entity.reviewCount,
+    bestRating: 5,
+    worstRating: 1
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    name: '海水浴場開設期間',
+    startDate: data.season.start,
+    endDate: data.season.end,
+    opens: '09:00',
+    closes: '16:00'
+  }
 };
 const seasonRows = [
   ['開設期間', `${data.season.start.replaceAll('-', '.')}〜${data.season.end.replaceAll('-', '.')}`],

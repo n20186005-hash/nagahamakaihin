@@ -8,16 +8,27 @@ import PlanSwitcher from '@/components/PlanSwitcher.astro';
 import AccessDiagram from '@/components/AccessDiagram.astro';
 import FaqList from '@/components/FaqList.astro';
 import Icon from '@/components/Icon.astro';
+import WeatherSection from '@/components/WeatherSection.astro';
+import VisitorServicesSection from '@/components/VisitorServicesSection.astro';
+import SeasonalStrategySection from '@/components/SeasonalStrategySection.astro';
+import ItinerariesSection from '@/components/ItinerariesSection.astro';
+import HistorySection from '@/components/HistorySection.astro';
+import ResponsibilitySection from '@/components/ResponsibilitySection.astro';
 import data from '@/data/site.json';
 
+const e = data.entity;
 const placeSchema = {
   '@context': 'https://schema.org',
   '@type': ['TouristAttraction', 'Park'],
-  name: '長浜海浜公園',
-  alternateName: ['長浜海水浴場', 'うみえ〜る長浜'],
+  '@id': `${data.site.url}/#attraction`,
+  name: e.fullNameJa,
+  alternateName: [e.fullNameEn, e.shortNameEn, '長浜海水浴場', 'うみえ〜る長浜'],
   description: data.site.description,
   url: data.site.url,
   image: [`${data.site.url}/images/og-nagahama.jpg`],
+  isAccessibleForFree: true,
+  publicAccess: true,
+  telephone: e.phone,
   address: {
     '@type': 'PostalAddress',
     postalCode: '413-0101',
@@ -31,14 +42,58 @@ const placeSchema = {
     latitude: data.site.latitude,
     longitude: data.site.longitude
   },
-  isAccessibleForFree: true,
-  publicAccess: true,
-  telephone: data.site.phone
+  hasMap: e.mapsShareUrl,
+  sameAs: [e.mapsShareUrl, e.govtTourismUrl],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: e.rating,
+    reviewCount: e.reviewCount,
+    bestRating: 5,
+    worstRating: 1
+  }
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: data.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer }
+  }))
 };
 ---
-<BaseLayout schema={placeSchema}>
+<BaseLayout
+  title="長浜海水浴場・海浜公園の過ごし方"
+  description="熱海・伊豆多賀の長浜海水浴場と長浜海浜公園を案内。駐車場（約350台）、シャワー、更衣室、アクセス、周辺ランチ、イベントをまとめています。"
+  schema={[placeSchema, faqSchema]}
+>
   <Hero />
   <StatusBar />
+
+  <section class="section-space pt-14" id="about">
+    <div class="container-site">
+      <SectionHeading eyebrow="ABOUT" title="長浜海浜公園（Nagahama Seaside Park）について" text="熱海市伊豆多賀の海辺にある都市公園。「Nagahama Kaihin（長浜海浜）」としても親しまれ、静岡県熱海市を代表する海水浴・レジャーエリアのひとつです。" />
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <div class="soft-card p-6">
+          <p class="text-xs font-bold tracking-wider text-sea-dark">所在地</p>
+          <p class="mt-2 text-sm font-bold">長浜海浜公園 → 熱海市 → 静岡県 → 日本</p>
+          <p class="mt-3 text-sm leading-7 text-ink-soft">郵便番号 413-0101（上多賀）、プラスコード {e.plusCode}。</p>
+        </div>
+        <div class="soft-card p-6">
+          <p class="text-xs font-bold tracking-wider text-sea-dark">周辺の観光地</p>
+          <p class="mt-2 text-sm font-bold">{e.nearbyLandmarks[0]} ・ {e.nearbyLandmarks[1]}</p>
+          <p class="mt-3 text-sm leading-7 text-ink-soft">長浜海浜公園とあわせて、熱海の海辺エリアを巡れます。</p>
+        </div>
+        <div class="soft-card p-6">
+          <p class="text-xs font-bold tracking-wider text-coral">公式・観光情報</p>
+          <p class="mt-2 text-sm font-bold">現地案内を優先</p>
+          <p class="mt-3 text-sm leading-7 text-ink-soft">最新の海況・交通・イベントは <a class="font-bold text-sea-dark underline decoration-sea/50 underline-offset-4" href={e.govtTourismUrl} target="_blank" rel="noopener noreferrer">{e.govtTourismName}</a> などをご確認ください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WeatherSection />
 
   <section class="section-space pt-14">
     <div class="container-site">
@@ -60,7 +115,7 @@ const placeSchema = {
     <div class="container-site grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
       <figure class="relative lg:order-2">
         <div class="absolute -right-5 -top-5 h-full w-full rounded-[2.2rem] border border-coral/35"></div>
-        <img src="/images/nagahama-calm.webp" width="1200" height="900" loading="lazy" alt="長浜海水浴場の砂浜と海、背後に見える山と街並み" class="relative aspect-[4/3] w-full rounded-[2.2rem] object-cover shadow-soft" />
+        <img src="/images/nagahama-calm.webp" width="1200" height="900" loading="lazy" alt="長浜海浜公園（Nagahama Kaihin）の砂浜と海、背後に見える山と街並み、熱海" class="relative aspect-[4/3] w-full rounded-[2.2rem] object-cover shadow-soft" />
         <figcaption class="absolute bottom-4 left-4 rounded-full bg-ink/70 px-4 py-2 text-xs text-white backdrop-blur">波の穏やかな南熱海の海辺</figcaption>
       </figure>
       <div class="lg:order-1">
@@ -73,12 +128,16 @@ const placeSchema = {
     </div>
   </section>
 
+  <VisitorServicesSection />
+
   <section class="section-space">
     <div class="container-site">
       <SectionHeading eyebrow="SLOW ITINERARY" title="予定を詰めすぎない、長浜の過ごし方。" text="子どもと遊ぶ日、海に入る日、ただ散歩する日。目的に合わせた半日の流れを選べます。" />
       <PlanSwitcher />
     </div>
   </section>
+
+  <ItinerariesSection />
 
   <section class="section-space bg-ink text-white">
     <div class="container-site grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
@@ -144,6 +203,12 @@ const placeSchema = {
       </div>
     </div>
   </section>
+
+  <SeasonalStrategySection />
+
+  <HistorySection />
+
+  <ResponsibilitySection />
 
   <section class="section-space">
     <div class="container-site max-w-4xl">

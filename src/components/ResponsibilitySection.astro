@@ -1,0 +1,27 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const items = [
+  { icon: 'drop', title: '水質と海の保全', text: '海水浴期間中は監視員が常駐し、目視や注意喚起で安全を確認します。磯や干潟の生き物の暮らしを守るため、触るだけにとどめ、環境をそのままに残しましょう。' },
+  { icon: 'pet', title: '生物との距離', text: '磯のカニや貝、渡り鳫や野鳥など、海辺には多くの生き物がいます。えさやりや捕獲はせず、観察だけで楽しむのが基本です。クラゲなどには素手で触れないよう注意してください。' },
+  { icon: 'no-fire', title: 'ごみは持ち帰る', text: '公園内には原則として大型のごみ箱がない場合があります。持ち込んだものは必ず持ち帰り、分別して自宅や施設のごみ箱へ。美しい海辺を次の人へつなぎます。' },
+  { icon: 'firstaid', title: '安全の確認', text: '遊泳は監視旗と係員の案内に従い、天候の急変や雷鳴には速やかに上がりましょう。日射病や脱水にも注意し、こまめな水分補給を。' },
+  { icon: 'baby', title: '地域との共存', text: '地元の方々の暮らしの場でもあります。深夜の騒ぎ、無断での立ち入り、火気の使用は控え、静かに過ごすマナーを守りましょう。' },
+  { icon: 'check', title: '最新情報の確認', text: '海況・設備・イベントは天候や時期で変わります。出かける前に現地の掲示と公式・観光案内をご確認ください。' },
+];
+---
+<section class="section-space bg-ink text-white">
+  <div class="container-site">
+    <SectionHeading eyebrow="SCIENCE & RESPONSIBILITY" title="海辺のしくみと、訪問者の責任" text="長浜の海辺がきれいに保たれている理由と、訪れる私たちにできることを科学の目で見てみます。" />
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((it) => (
+        <div class="rounded-[1.5rem] border border-white/12 bg-white/[0.06] p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-full bg-white/10 text-sea"><Icon name={it.icon} size={22} /></span>
+          <h3 class="mt-5 font-serif text-lg font-semibold">{it.title}</h3>
+          <p class="mt-3 text-sm leading-7 text-white/70">{it.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
