@@ -1,0 +1,158 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Icon from '@/components/Icon.astro';
+import data from '@/data/site.json';
+
+const title = '長浜海水浴場の駐車場｜料金・営業時間・アクセス';
+const description = '長浜海水浴場（熱海・伊豆多賀）の駐車場を解説。普通車1台1,000円（約350台）、開設期間中の利用時間9:00〜16:00、無料となる時期、週末や花火日の混雑目安、電車・バスでの代替アクセスをまとめています。';
+
+const priceRows = [
+  ['普通車', '1台 1,000円（海水浴場開設期間中）'],
+  ['大型車・マイクロバス', '現地案内（熱海市）をご確認ください'],
+  ['原則無料の時期', '海水浴場の開設期間外'],
+  ['収容台数', '約350台'],
+  ['利用時間', '9:00〜16:00（開設期間中）'],
+];
+
+const parkingFaqs = [
+  {
+    question: '長浜海水浴場の駐車場は有料ですか？',
+    answer: '海水浴場の開設期間中は普通車1台1,000円の有料案内です（約350台）。開設期間外は原則無料で利用できます。最新の料金は熱海市の公式発表をご確認ください。',
+  },
+  {
+    question: '駐車場は何台収容できますか？',
+    answer: '約350台の駐車場があります。海水浴シーズンの週末や花火大会日は早朝から満車になりやすいため、余裕を持った到着か公共交通の利用がおすすめです。',
+  },
+  {
+    question: '駐車場の利用時間はいつですか？',
+    answer: '海水浴場開設期間中の案内は9:00〜16:00です。それ以外の時期は原則無料で、公園を利用される方の駐車ができます。',
+  },
+  {
+    question: '2027年の駐車場料金はいくらですか？',
+    answer: '2026年の海水浴場は8月30日に終了しました。2027年の開設期間と駐車場料金は熱海市の公式発表をお待ちください。このページの数値は2026年海水浴季のものです。',
+  },
+  {
+    question: '混雑時はどうすればいいですか？',
+    answer: '開設期間中の週末や連休、花火大会日は早朝の到着が安心です。荷物が少ない日は、伊豆多賀駅から徒歩約7〜10分や「長浜」バス停の利用も選択肢になります。',
+  },
+];
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${data.site.url}/` },
+    { '@type': 'ListItem', position: 2, name: '駐車場', item: `${data.site.url}/parking/` },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: parkingFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+---
+<BaseLayout title={title} description={description} schema={[breadcrumbSchema, faqSchema]}>
+  <PageHero eyebrow="PARKING" title="長浜海水浴場の駐車場ガイド｜料金・営業時間・アクセス" text="熱海・伊豆多賀の長浜海水浴場へ車で訪れる方のために、料金、収容台数、利用時間、混雑の目安、そして電車やバスでの代替アクセスをまとめました。" icon="parking" image="/images/nagahama-calm.webp" imageAlt="長浜海浜公園（Nagahama Kaihin）の砂浜と駐車場周辺" />
+
+  <section class="section-space">
+    <div class="container-site">
+      <div class="rounded-[1.5rem] border border-sea/25 bg-sea-pale/50 p-6 sm:p-8">
+        <div class="flex items-start gap-4"><span class="mt-0.5 text-sea-dark"><Icon name="calendar" size={24} /></span><div>
+          <h2 class="font-bold">2026年の海水浴季は終了しました</h2>
+          <p class="mt-2 text-sm leading-7 text-ink-soft">{data.season.endedNote}</p>
+          <p class="mt-2 text-sm leading-7 text-ink-soft">{data.season.nextYearLabel}の開設期間と料金は<span class="font-bold">{data.season.nextYearStatus}</span>です。掲載している数値は2026年海水浴季のものです。</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+      <div>
+        <SectionHeading eyebrow="LOCATION" title="駐車場の場所と入口" text="駐車場は長浜海浜公園・長浜海水浴場の入口近くにあります。国道135号から海側へ入り、案内看板に従ってお進みください。" />
+        <p class="mt-6 body-copy text-sm">海水浴シーズンは入口付近で誘導があるため、係員の指示に従って駐車してください。満車の場合は周辺の混雑を避け、公共交通の利用もご検討ください。</p>
+        <a href="/access/" class="button-secondary mt-7">アクセス全体を見る <Icon name="arrow" size={18} /></a>
+      </div>
+      <dl class="overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white shadow-card">
+        {priceRows.map(([label, value], index) => (
+          <div class:list={["grid gap-2 px-5 py-4 sm:grid-cols-[12rem_1fr] sm:px-7", index !== priceRows.length - 1 && "border-b border-ink/10"]}>
+            <dt class="text-sm font-bold text-ink/55">{label}</dt>
+            <dd class="font-bold">{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="container-site">
+      <SectionHeading eyebrow="SEASON" title="無料となる時期と有料の季節" text="駐車場が有料になるのは海水浴場の開設期間中のみです。それ以外の時期は原則無料で、公園の散歩や遊具、海岸散策にご利用いただけます。" />
+      <div class="mt-9 grid gap-4 sm:grid-cols-2">
+        <article class="soft-card p-7"><span class="grid h-14 w-14 place-items-center rounded-full bg-coral-pale text-coral"><Icon name="sun" size={28} /></span><h3 class="mt-6 font-serif text-xl font-semibold">開設期間中は有料</h3><p class="body-copy mt-4 text-sm">海水浴場が開設される夏の期間は、普通車1台1,000円の案内です。9:00〜16:00の利用時間があります。</p></article>
+        <article class="soft-card p-7"><span class="grid h-14 w-14 place-items-center rounded-full bg-sea-pale text-sea-dark"><Icon name="park" size={28} /></span><h3 class="mt-6 font-serif text-xl font-semibold">Off-season は原則無料</h3><p class="body-copy mt-4 text-sm">春・秋・冬の散歩や、大型遊具で遊ぶ日、海岸の写真撮影などは駐車場を原則無料でご利用いただけます。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
+      <div>
+        <SectionHeading eyebrow="CONGESTION" title="混雑と祝日の目安" text="海水浴シーズンの週末や連休、花火大会の日は駐車場が早く満車になります。到着時間と帰りの渋滞を見込んで計画してください。" />
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {[
+          ['clock', '9時前後を目安に', '混雑日ほど、開設時間に合わせた早めの到着が安心です。'],
+          ['calendar', 'イベント日を避ける', '花火大会や特設市の日は、通常より交通が集中します。'],
+          ['train', '公共交通も選択肢', '伊豆多賀駅から徒歩約7〜10分。荷物が少ない日は駐車の心配がありません。'],
+          ['car', '渋滞を見込む', '夏季・週末の国道135号は混みやすく、余裕を持った移動を。'],
+        ].map(([icon, name, text]) => (
+          <article class="soft-card p-6"><Icon name={icon} size={25} class="text-sea-dark" /><h3 class="mt-4 font-serif text-lg font-semibold">{name}</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space">
+    <div class="container-site">
+      <SectionHeading eyebrow="BY PUBLIC TRANSIT" title="電車・バスでの代替アクセス" text="車を使わずに海へ行く場合、伊豆多賀駅や「長浜」バス停が便利です。駐車場の混雑を避けたい日にぴったりです。" align="center" />
+      <div class="mx-auto mt-10 grid max-w-4xl gap-5 md:grid-cols-2">
+        <article class="soft-card p-7"><span class="grid h-14 w-14 place-items-center rounded-full bg-sea-pale text-sea-dark"><Icon name="train" size={28} /></span><h3 class="mt-6 font-serif text-xl font-semibold">JR伊豆多賀駅から徒歩</h3><p class="body-copy mt-4 text-sm">熱海駅からJR伊東線で約10分、伊豆多賀駅下車。海側へ坂を下り、徒歩約7〜10分で長浜海浜公園です。</p></article>
+        <article class="soft-card p-7"><span class="grid h-14 w-14 place-items-center rounded-full bg-coral-pale text-coral"><Icon name="bus" size={28} /></span><h3 class="mt-6 font-serif text-xl font-semibold">「長浜」バス停下車</h3><p class="body-copy mt-4 text-sm">熱海駅から網代方面行きのバスに乗り、「長浜」で下車。国道135号沿いで、公園はバス停のすぐ近くです。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site max-w-4xl">
+      <SectionHeading eyebrow="FAQ" title="駐車場によくある質問。" align="center" />
+      <div class="mt-9 grid gap-4">
+        {parkingFaqs.map((faq) => (
+          <details class="soft-card group p-6 open:shadow-card">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold">
+              <span>{faq.question}</span>
+              <Icon name="chevron" size={20} class="shrink-0 text-ink/40 transition-transform group-open:rotate-180" />
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-ink-soft">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16 sm:pb-24">
+    <div class="container-site overflow-hidden rounded-[2rem] bg-ink text-white shadow-soft">
+      <div class="grid gap-8 p-8 sm:grid-cols-3 sm:p-11">
+        <a href="/beach/" class="rounded-2xl bg-white/8 p-6 transition hover:bg-white/14"><p class="text-xs font-bold tracking-wider text-sea">BEACH</p><p class="mt-3 font-serif text-lg font-semibold">海水浴・設備</p><p class="mt-2 text-sm text-white/65">シャワー・更衣室・遊泳ルール</p></a>
+        <a href="/access/" class="rounded-2xl bg-white/8 p-6 transition hover:bg-white/14"><p class="text-xs font-bold tracking-wider text-sea">ACCESS</p><p class="mt-3 font-serif text-lg font-semibold">アクセス</p><p class="mt-2 text-sm text-white/65">電車・バス・車での行き方</p></a>
+        <a href="/" class="rounded-2xl bg-white/8 p-6 transition hover:bg-white/14"><p class="text-xs font-bold tracking-wider text-sea">TOP</p><p class="mt-3 font-serif text-lg font-semibold">ホーム</p><p class="mt-2 text-sm text-white/65">長浜海浜公園ガイド</p></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

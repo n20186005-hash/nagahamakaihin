@@ -22,14 +22,14 @@
     "countryEn": "Japan",
     "countryJa": "日本",
     "countryCode": "JP",
-    "postalCode": "413-0102",
+    "postalCode": "413-0101",
     "latitude": 35.0561852,
     "longitude": 139.0690894,
     "plusCode": "3349+FJ",
     "mapsShareUrl": "https://maps.app.goo.gl/UUKTgXWUQ9uMMAW2A",
     "phone": "+81557866218",
     "rating": 4.1,
-    "reviewCount": 3015,
+    "reviewCount": 3028,
     "ratingSource": "Google Maps",
     "nearbyLandmarks": ["熱海サンビーチ", "MOA美術館"],
     "govtTourismUrl": "https://www.city.atami.shizuoka.jp/",
@@ -51,7 +51,10 @@
     "foodCourt": "10:00〜15:00／19:00〜21:00",
     "fireworksArea": "手持ち花火 19:00〜21:00",
     "petRule": "海水浴期間中はペット同伴不可（介助犬等を除く）",
-    "waterActivityRule": "遊泳エリア内では水上バイク・SUP・カヤック利用不可"
+    "waterActivityRule": "遊泳エリア内では水上バイク・SUP・カヤック利用不可",
+    "endedNote": "2026年の海水浴場は8月30日に終了しました。次回の2027年開設情報は、熱海市の公式発表をお待ちください。",
+    "nextYearLabel": "2027年",
+    "nextYearStatus": "未発表"
   },
   "features": [
     {
@@ -222,8 +225,12 @@
       "answer": "公園への入場は無料です。通常期の駐車場も原則無料ですが、海水浴場開設期間は有料になります。"
     },
     {
+      "question": "長浜海水浴場の駐車場は有料ですか？",
+      "answer": "海水浴場の開設期間中は普通車1台1,000円の有料案内です（約350台）。開設期間外は原則無料で利用できます。料金や混雑の目安は駐車場の専用ページでまとめています。"
+    },
+    {
       "question": "2026年の海水浴場はいつまでですか？",
-      "answer": "2026年7月11日から8月30日まで、9:00〜16:00の開設予定です。荒天時は遊泳禁止になるため、現地の監視旗と案内に従ってください。"
+      "answer": "2026年は7月11日から8月30日まで、9:00〜16:00で開設されていました。すでに8月30日で終了しています。2027年の開設期間と料金は熱海市の公式発表をお待ちください。荒天時は遊泳禁止になるため、現地の監視旗と案内に従ってください。"
     },
     {
       "question": "シャワーや更衣室はありますか？",

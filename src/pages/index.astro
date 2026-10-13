@@ -63,8 +63,8 @@ const faqSchema = {
 };
 ---
 <BaseLayout
-  title="長浜海水浴場・海浜公園の過ごし方"
-  description="熱海・伊豆多賀の長浜海水浴場と長浜海浜公園を案内。駐車場（約350台）、シャワー、更衣室、アクセス、周辺ランチ、イベントをまとめています。"
+  title="長浜海浜公園｜駐車場・アクセス・遊具・海水浴"
+  description="静岡県熱海市の長浜海浜公園を詳しく紹介。駐車場、伊豆多賀駅からのアクセス、大型遊具、長浜海水浴場のシャワーや設備、季節のイベント情報をまとめています。"
   schema={[placeSchema, faqSchema]}
 >
   <Hero />
@@ -226,7 +226,10 @@ const faqSchema = {
           <h2 class="mt-4 font-serif text-3xl font-semibold">海へ行く前に、アクセスと持ち物を確認。</h2>
           <p class="mt-4 max-w-2xl text-sm leading-7 text-ink-soft">夏季は現金が必要な設備があります。日差し対策、水分、着替え、100円・500円硬貨を準備しておくと安心です。</p>
         </div>
-        <a href="/access/" class="button-primary shrink-0">アクセスを見る <Icon name="arrow" size={18} /></a>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a href="/access/" class="button-primary shrink-0">アクセスを見る <Icon name="arrow" size={18} /></a>
+          <a href="/parking/" class="button-secondary shrink-0">駐車場の料金を見る <Icon name="arrow" size={18} /></a>
+        </div>
       </div>
     </div>
   </section>
