@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+const title = 'このサイトについて｜長浜海浜ガイド';
+const description = '長浜海浜ガイドの運営方針と、公式情報の確認について。';
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="ABOUT THIS GUIDE" title="長浜海浜ガイドについて" text="熱海・伊豆多賀の海辺を歩くための独立した観光情報ガイドです。" icon="waves" />
+  <section class="section-space">
+    <article class="container-site max-w-4xl rounded-[2rem] border border-ink/10 bg-paper p-7 shadow-card sm:p-11">
+      <div class="space-y-8 text-sm leading-8 text-ink-soft">
+        <section>
+          <h2 class="font-serif text-2xl font-semibold text-ink">サイトの目的</h2>
+          <p class="mt-4">長浜海浜ガイドは、熱海・伊豆多賀の海岸線を初めて訪れる方も迷わず散策できるように、海水浴、交通、駐車場、周辺の見どころを整理した非公式のローカルガイドです。</p>
+          <p class="mt-3">お出かけ前には、天候や施設の利用条件、交通状況について、現地の掲示や管理者・自治体が発信する最新情報をご確認ください。</p>
+        </section>
+        <section>
+          <h2 class="font-serif text-2xl font-semibold text-ink">運営主体について</h2>
+          <p class="mt-4">本サイトは独立した観光情報プロジェクトです。長浜海浜公園、熱海市、その他の行政機関・公的団体による公式サイトではなく、これらの組織との提携・所属関係もありません。</p>
+          <p class="mt-3">公園の管理運営や利用上の決まりに関する正式な案内は、現地の管理者および熱海市などの公式情報を優先してください。</p>
+        </section>
+        <section>
+          <h2 class="font-serif text-2xl font-semibold text-ink">関連ページ</h2>
+          <p class="mt-4"><a class="text-sea-dark underline" href="/credits/">写真・情報出典</a>と<a class="text-sea-dark underline" href="/privacy/">プライバシーポリシー</a>をご覧いただけます。</p>
+        </section>
+      </div>
+    </article>
+  </section>
+</BaseLayout>
