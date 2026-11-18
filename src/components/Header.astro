@@ -9,6 +9,7 @@ const nav = [
   { href: '/family/', label: '子どもと遊ぶ' },
   { href: '/access/', label: 'アクセス' },
   { href: '/parking/', label: '駐車場' },
+  { href: '/nearby/', label: '周辺散策' },
   { href: '/food/', label: '周辺ランチ' },
   { href: '/events/', label: 'イベント' },
   { href: '/faq/', label: 'よくある質問' },
@@ -26,7 +27,7 @@ const nav = [
       </span>
     </a>
 
-    <nav class="hidden items-center gap-5 lg:flex" aria-label="メインナビゲーション">
+    <nav class="hidden items-center gap-4 xl:flex" aria-label="メインナビゲーション">
       {nav.map((item) => {
         const active = pathname.startsWith(item.href);
         return <a href={item.href} class:list={["relative py-2 text-sm font-bold transition-colors hover:text-sea-dark", active ? 'text-sea-dark' : 'text-ink-soft']} aria-current={active ? 'page' : undefined}>
@@ -36,19 +37,19 @@ const nav = [
       })}
     </nav>
 
-    <div class="hidden lg:block">
+    <div class="hidden xl:block">
       <a href="/access/#route" class="button-primary min-h-11 px-5 text-sm">
         <Icon name="map-pin" size={18} /> 行き方を見る
       </a>
     </div>
 
-    <button id="menu-button" class="grid h-11 w-11 place-items-center rounded-full border border-ink/15 bg-paper lg:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="メニューを開く">
+    <button id="menu-button" class="grid h-11 w-11 place-items-center rounded-full border border-ink/15 bg-paper xl:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="メニューを開く">
       <span class="menu-open"><Icon name="menu" size={22} /></span>
       <span class="menu-close hidden"><Icon name="close" size={22} /></span>
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden border-t border-ink/10 bg-paper lg:hidden">
+  <div id="mobile-menu" class="hidden border-t border-ink/10 bg-paper xl:hidden">
     <nav class="container-site grid gap-1 py-4" aria-label="モバイルナビゲーション">
       {nav.map((item) => <a href={item.href} class="flex items-center justify-between rounded-xl px-4 py-3 font-bold hover:bg-sea-pale">
         {item.label}<Icon name="chevron" size={18} />

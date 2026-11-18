@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+interface Props {
+ title:string; description:string; name:string; tagline:string; intro:string; about:string;
+ map:string; address:string; manager:string; type:string; hours:string; fee:string; access:string;
+ history:string; architecture:string; culture:string; experience:string; tips:string[]; highlights:string[];
+ route:string[]; notices:string[]; photos:{src:string;alt:string;source:string}[];
+ faq:{q:string;a:string}[]; official:string; officialLabel:string; otherHref:string; otherLabel:string;
+}
+const p=Astro.props;
+const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:p.faq.map(f=>({'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}}))};
+---
+<BaseLayout title={p.title} description={p.description} schema={faqSchema}>
+ <PageHero eyebrow="EXPLORE IZU TAGA" title={p.name} text={p.tagline} icon="map-pin" image={p.photos[0].src} imageAlt={p.photos[0].alt} />
+ <section class="section-space"><div class="container-site grid gap-8 lg:grid-cols-[1.2fr_.8fr]">
+  <div><SectionHeading eyebrow="DISCOVER" title={`${p.name}を歩く`} text={p.intro} /><h3 class="mt-8 font-serif text-xl font-semibold">訪問のヒント</h3><ul class="mt-4 list-disc space-y-3 pl-5 text-sm leading-8 text-ink-soft">{p.tips.map(t=><li>{t}</li>)}</ul><h3 class="mt-8 font-serif text-xl font-semibold">見どころ</h3><ul class="mt-4 list-disc space-y-3 pl-5 text-sm leading-8 text-ink-soft">{p.highlights.map(t=><li>{t}</li>)}</ul></div>
+  <aside class="rounded-[2rem] bg-sea-pale p-7 sm:p-9"><p class="eyebrow">ABOUT & MANAGEMENT</p><h2 class="mt-4 font-serif text-2xl font-semibold">{p.name}について</h2><p class="mt-4 text-sm leading-8 text-ink-soft">{p.about}</p><p class="mt-5 text-sm leading-8"><strong>管理主体：</strong>{p.manager}</p><a href={p.official} class="mt-4 inline-block text-sm font-bold text-sea-dark underline" target="_blank" rel="noopener noreferrer">公式施設案内を見る ↗</a></aside>
+ </div></section>
+ <section class="section-space bg-paper"><div class="container-site"><SectionHeading eyebrow="BASIC INFORMATION" title="基本情報" /><dl class="mt-8 overflow-hidden rounded-3xl bg-white shadow-card">{[['名称',p.name],['所在地',p.address],['種別',p.type],['公開・利用時間',p.hours],['料金',p.fee],['アクセス',p.access]].map(([k,v])=><div class="grid gap-2 border-b border-ink/10 px-6 py-4 last:border-0 sm:grid-cols-[12rem_1fr]"><dt class="font-bold text-ink/60">{k}</dt><dd class="text-sm leading-8">{v}</dd></div>)}</dl><a href={p.map} class="button-secondary mt-7" target="_blank" rel="noopener noreferrer">この景点をGoogleマップで見る ↗</a></div></section>
+ <section class="section-space"><div class="container-site"><SectionHeading eyebrow="HISTORY & CHARACTER" title="この場所ならではの魅力" /><div class="mt-8 grid gap-5 md:grid-cols-2">{[['成り立ち・歴史',p.history],['施設と景観の特徴',p.architecture],['地域との関わり',p.culture],['現地で楽しむ体験',p.experience]].map(([h,b])=><article class="soft-card p-7"><h3 class="font-serif text-xl font-semibold">{h}</h3><p class="mt-4 text-sm leading-8 text-ink-soft">{b}</p></article>)}</div></div></section>
+ <section class="section-space bg-paper"><div class="container-site"><SectionHeading eyebrow="WALKING PLAN" title="おすすめの歩き方" /><ol class="mt-8 grid gap-4">{p.route.map((s,i)=><li class="flex items-start gap-4 rounded-2xl bg-white p-6"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-white">{i+1}</span><p class="pt-1 text-sm leading-8">{s}</p></li>)}</ol></div></section>
+ <section class="section-space"><div class="container-site"><SectionHeading eyebrow="PHOTO SPOTS" title="現地の景色と撮影のヒント" /><div class="mt-8 grid gap-6 md:grid-cols-2">{p.photos.map(photo=><figure class="soft-card overflow-hidden"><img src={photo.src} alt={photo.alt} width="600" height="450" loading="lazy" class="aspect-[4/3] w-full object-cover" /><figcaption class="p-5 text-sm leading-7 text-ink-soft">{photo.alt} <span class="block text-xs">写真：{photo.source}</span></figcaption></figure>)}</div><h2 class="mt-12 font-serif text-2xl font-semibold">訪問時の注意</h2><ul class="mt-5 list-disc space-y-3 pl-5 text-sm leading-8 text-ink-soft">{p.notices.map(n=><li>{n}</li>)}</ul></div></section>
+ <section class="section-space bg-paper"><div class="container-site"><SectionHeading eyebrow="FAQ" title="よくある質問" /><div class="mt-8 grid gap-4">{p.faq.map(item=><article class="soft-card p-6"><h3 class="font-bold">{item.q}</h3><p class="mt-3 text-sm leading-8 text-ink-soft">{item.a}</p></article>)}</div></div></section>
+ <section class="section-space"><div class="container-site rounded-[2rem] bg-ink p-8 text-white sm:p-10"><h2 class="font-serif text-2xl font-semibold">アクセス・周辺スポット</h2><p class="mt-4 text-sm leading-8 text-white/75">{p.address}。現地への入口・交通条件は出発前に確認してください。</p><div class="mt-7 flex flex-wrap gap-4"><a class="button-primary bg-white text-ink" href={p.map} target="_blank" rel="noopener noreferrer">Googleマップで案内 ↗</a><a class="button-primary" href={p.otherHref}>{p.otherLabel} →</a><a class="button-primary" href="/nearby/">周辺散策一覧 →</a></div><p class="mt-7 text-xs text-white/65">参考資料：<a class="underline" href={p.official} target="_blank" rel="noopener noreferrer">{p.officialLabel}</a>（2026年11月18日参照）</p></div></section>
+</BaseLayout>
