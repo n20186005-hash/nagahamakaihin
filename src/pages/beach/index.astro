@@ -6,8 +6,8 @@ import FacilityGrid from '@/components/FacilityGrid.astro';
 import Icon from '@/components/Icon.astro';
 import data from '@/data/site.json';
 
-const title = '長浜海水浴場｜駐車場・シャワー・更衣室・遊泳ルール';
-const description = '長浜海水浴場（熱海）の2026年開設期間と監視時間、駐車場（約350台・普通車1台1,000円）の料金と混雑目安、シャワー・更衣室・コインロッカーの設備、遊泳禁止の目印となる監視旗をまとめています。';
+const title = '長浜海水浴場（熱海）｜2027年海開き・駐車場・シャワー案内';
+const description = '熱海・伊豆多賀の長浜海水浴場。2026年の海水浴シーズンは終了。2027年の海開き発表前に、駐車場、無料冷水シャワー、更衣室、料金、駅からのアクセスを確認。';
 const beachSchema = {
   '@context': 'https://schema.org',
   '@type': 'Beach',
@@ -63,7 +63,7 @@ const seasonRows = [
 ];
 ---
 <BaseLayout title={title} description={description} schema={beachSchema}>
-  <PageHero eyebrow="BEACH GUIDE" title="長浜海水浴場ガイド｜設備・料金・利用期間" text="長浜海水浴場は、約400mの砂浜と比較的穏やかな海が魅力。夏季の設備、料金、ルールを先に確認して、気持ちよく一日を過ごしましょう。" icon="sun" image="/images/nagahama-summer.webp" imageAlt="長浜海水浴場の砂浜と穏やかな海" />
+  <PageHero eyebrow="BEACH GUIDE" title="長浜海水浴場（熱海）｜海開き・駐車場・シャワー" text="伊豆多賀駅から徒歩約7〜10分、約400mの砂浜が続く長浜海水浴場。2026年の海水浴期間は終了しました。2027年の海開き情報を待つ間に、駐車料金・更衣室・無料冷水シャワー・遊泳ルールを確認できます。" icon="sun" image="/images/nagahama-summer.webp" imageAlt="長浜海水浴場の砂浜と穏やかな海" />
 
   <section class="section-space">
     <div class="container-site grid gap-10 lg:grid-cols-[1.05fr_.95fr]">
@@ -122,6 +122,7 @@ const seasonRows = [
       <div>
         <SectionHeading eyebrow="PARKING" title="長浜海水浴場の駐車場と料金" text="海水浴シーズンは約350台の駐車場が有料になります。混雑の目安、営業時間、無料となる時期をまとめた専用ページを用意しています。" />
         <a href="/parking/" class="button-secondary mt-7">駐車場の料金・営業時間を見る <Icon name="arrow" size={18} /></a>
+        <p class="mt-5 text-sm leading-7 text-ink-soft">シャワーや更衣室の場所・料金を調べる方は <a class="font-bold text-sea-dark underline" href="/shower-changing/">シャワー・更衣室の専用ガイド</a> もご覧ください。</p>
       </div>
       <dl class="overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white shadow-card">
         <div class="grid gap-2 px-5 py-4 sm:grid-cols-[11rem_1fr] sm:px-7 border-b border-ink/10">

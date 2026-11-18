@@ -70,6 +70,26 @@ const faqSchema = {
   <Hero />
   <StatusBar />
 
+  <section class="section-space" id="nearby-walks">
+    <div class="container-site grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+      <SectionHeading eyebrow="EXPLORE NEARBY" title="伊豆多賀の桜並木と海の展望へ" text="長浜の砂浜から少し足を延ばして、さくらの名所散策路「四季の道」や小山臨海公園の景色を楽しめます。" />
+      <a class="button-secondary" href="/nearby/">周辺散策ガイドを見る →</a>
+    </div>
+  </section>
+
+  <section class="section-space bg-paper" id="season-guides">
+    <div class="container-site">
+      <SectionHeading eyebrow="PLAN YOUR VISIT" title="長浜の海辺を楽しむための実用ガイド" text="駐車場や夏の設備、夜の手持ち花火など、出発前に気になる情報をテーマ別にまとめました。" />
+      <div class="mt-9 grid gap-5 md:grid-cols-3">
+        {[
+          { href: '/parking/', label: '駐車場・料金', text: '夏季の利用時間と料金、混雑しやすい日の目安。' },
+          { href: '/shower-changing/', label: 'シャワー・更衣室', text: '無料冷水シャワー、温水設備、着替えとロッカー。' },
+          { href: '/fireworks/', label: '手持ち花火', text: '指定花火広場の場所、時間、禁止されている花火。' }
+        ].map((item) => <a href={item.href} class="soft-card block p-7 transition hover:-translate-y-1"><h3 class="font-serif text-xl font-semibold">{item.label} →</h3><p class="mt-3 text-sm leading-7 text-ink-soft">{item.text}</p></a>)}
+      </div>
+    </div>
+  </section>
+
   <section class="section-space pt-14" id="about">
     <div class="container-site">
       <SectionHeading eyebrow="ABOUT" title="長浜海浜公園（Nagahama Seaside Park）について" text="熱海市伊豆多賀の海辺にある都市公園。「Nagahama Kaihin（長浜海浜）」としても親しまれ、静岡県熱海市を代表する海水浴・レジャーエリアのひとつです。" />

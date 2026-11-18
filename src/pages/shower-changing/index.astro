@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import data from '@/data/site.json';
+
+const title = '長浜海水浴場のシャワー・更衣室・ロッカー｜場所と料金';
+const description = '熱海の長浜海水浴場で使える無料冷水シャワー、更衣室、うみえ〜る長浜の有料温水シャワーとコインロッカーを比較。2026年夏季の設備案内と持ち物。';
+const facilities = [
+  ['屋外冷水シャワー','無料','砂を洗い流すときに便利。夏季の設置・利用状況は現地確認。'],
+  ['更衣室','着替えは無料','うみえ〜る長浜や夏季休憩施設に案内があります。利用時間は当日の掲示を確認。'],
+  ['温水シャワー','コイン式・有料','うみえ〜る長浜内。硬貨を用意し、営業期間と利用料金を現地で確認。'],
+  ['コインロッカー','有料','2026年の案内では300円・500円の区分。現金の硬貨を持参。']
+];
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="BEACH FACILITIES" title="長浜海水浴場のシャワー・更衣室・ロッカー" text="海から上がった後の着替えはどこで？ 無料と有料の設備を区別し、夏の準備と帰りの動線をまとめました。" icon="shower" image="/images/nagahama-summer.webp" imageAlt="長浜海水浴場の海辺と砂浜" />
+  <section class="section-space"><div class="container-site"><SectionHeading eyebrow="FACILITY GUIDE" title="設備の種類と利用の目安" text="下表は2026年の海水浴シーズンの案内に基づきます。2026年の海水浴場開設は8月30日に終了しており、2027年の営業日・料金は再確認が必要です。" />
+    <div class="mt-9 grid gap-5 md:grid-cols-2">{facilities.map(([heading,price,body]) => <article class="soft-card p-7"><p class="text-xs font-bold tracking-wider text-sea-dark">{price}</p><h2 class="mt-3 font-serif text-2xl font-semibold">{heading}</h2><p class="mt-4 text-sm leading-8 text-ink-soft">{body}</p></article>)}</div>
+  </div></section>
+  <section class="section-space bg-paper"><div class="container-site grid gap-10 lg:grid-cols-2 lg:items-center"><div><SectionHeading eyebrow="LOCATION" title="「うみえ〜る長浜」を目印に" text="長浜海浜公園の海沿いにある休憩施設が、着替え・温水シャワーなどの案内を探す目印です。屋外冷水シャワーやトイレの場所も現地の掲示で確認してください。" /><p class="mt-6 text-sm leading-8 text-ink-soft">所在地：〒413-0101 静岡県熱海市上多賀地先。JR伊豆多賀駅から徒歩約7〜10分。国道135号から車で来る場合、夏季は駐車場の混雑に注意が必要です。</p><a class="button-secondary mt-7" href={data.entity.mapsShareUrl} target="_blank" rel="noopener noreferrer">Googleマップで場所を確認 ↗</a></div><figure><img src="/images/nagahama-calm.webp" alt="長浜海浜公園の砂浜と海の景観" width="1200" height="900" loading="lazy" class="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-soft" /><figcaption class="mt-3 text-xs text-ink-soft">公園の海辺の景観。設備の場所は現地案内をご確認ください。</figcaption></figure></div></section>
+  <section class="section-space"><div class="container-site"><SectionHeading eyebrow="BEFORE YOU GO" title="海水浴前に準備しておきたいもの" /><div class="mt-8 grid gap-5 md:grid-cols-3">{[
+    ['硬貨と防水袋','温水シャワーやロッカーはコイン式の案内があります。貴重品用の防水袋も便利。'],
+    ['タオルと着替え','海水浴後の着替えを乾いた袋に分け、子ども用の予備衣類も用意。'],
+    ['帰る時間の確認','監視時間や夏季施設の営業時間と、駐車場・帰りの列車時刻を確認。']
+  ].map(([heading,body]) => <article class="soft-card p-7"><h3 class="font-serif text-xl font-semibold">{heading}</h3><p class="mt-3 text-sm leading-8 text-ink-soft">{body}</p></article>)}</div>
+    <div class="mt-10 rounded-3xl bg-sea-pale p-7"><h2 class="font-serif text-xl font-semibold">公式の設備案内</h2><p class="mt-3 text-sm leading-8">出発前に <a class="underline" href="https://www.ataminews.gr.jp/spot/684" target="_blank" rel="noopener noreferrer">熱海市観光協会（あたみニュース） ↗</a> と <a class="underline" href="https://www.city.atami.lg.jp/shisetsu/bunka/1002073/1002075.html" target="_blank" rel="noopener noreferrer">熱海市・長浜海水浴場施設案内 ↗</a> を確認してください。2026年11月18日参照。</p><p class="mt-4 text-sm"><a class="font-bold underline" href="/beach/">海水浴場のルール →</a>　<a class="font-bold underline" href="/parking/">駐車場・料金 →</a>　<a class="font-bold underline" href="/family/">子連れの遊び方 →</a></p></div>
+  </div></section>
+</BaseLayout>

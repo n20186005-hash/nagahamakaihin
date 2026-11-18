@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import data from '@/data/site.json';
+
+const title = '長浜海浜公園で手持ち花火はできる？｜場所・時間・禁止事項';
+const description = '熱海・長浜海浜公園の手持ち花火ガイド。2026年の指定花火広場、19時〜21時の利用案内、持ち込み、打上花火・BBQ禁止、電車での帰り方を紹介。';
+const questions = [
+  { q: '長浜海浜公園で手持ち花火はできますか？', a: '通常、公園とビーチは火気使用禁止です。2026年の海水浴場開設期間には、うみえ〜る長浜前の指定花火広場に限り、19:00〜21:00に手持ち花火を楽しめる特別運用がありました。2027年以降の開催は公式案内をご確認ください。' },
+  { q: '花火を持ち込めますか？', a: '2026年の指定花火広場では持ち込み可能と案内されていました。ただし打上花火は禁止で、指定区域外では花火を使用できません。' },
+  { q: '海辺ならどこでも花火ができますか？', a: 'いいえ。指定花火広場の外や、公園の芝生などでの火気使用はできません。現地の区画と係員の案内に従ってください。' }
+];
+const schema = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: questions.map(({q,a}) => ({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))
+};
+---
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero eyebrow="HANDHELD FIREWORKS" title="長浜海浜公園の手持ち花火ガイド" text="夜の砂浜で花火を楽しむ前に、指定場所と期間を確認。2026年の運用実績と、通年の火気禁止ルールを整理しました。" icon="calendar" image="/images/nagahama-calm.webp" imageAlt="長浜海浜公園の砂浜と海" />
+  <section class="section-space"><div class="container-site grid gap-10 lg:grid-cols-[1.1fr_.9fr]">
+    <div><SectionHeading eyebrow="SEASON RULE" title="2026年の花火広場は終了しています" text="長浜海水浴場の2026年の開設期間は7月11日〜8月30日でした。以下はその期間の案内であり、今夜の利用を保証するものではありません。" />
+      <div class="mt-8 overflow-hidden rounded-3xl border border-ink/10 bg-paper">
+        {[
+          ['場所','うみえ〜る長浜前の指定花火広場（青色LEDの区画）'],
+          ['2026年の利用時間','19:00〜21:00（海水浴場開設期間中）'],
+          ['使える花火','手持ち花火。持ち込み可能という2026年の案内'],
+          ['禁止事項','打上花火・指定区域外での花火・BBQなどの火気'],
+          ['次のシーズン','2027年の実施日・利用時間は公式発表で再確認']
+        ].map(([label,value]) => <div class="grid gap-2 border-b border-ink/10 px-6 py-4 last:border-0 sm:grid-cols-[11rem_1fr]"><dt class="text-sm font-bold text-ink/60">{label}</dt><dd class="text-sm font-semibold leading-7">{value}</dd></div>)}
+      </div>
+    </div>
+    <aside class="rounded-[2rem] bg-ink p-8 text-white"><p class="eyebrow text-sea">LOCATION</p><h2 class="mt-4 font-serif text-2xl">海辺への行き方</h2><p class="mt-4 text-sm leading-8 text-white/75">JR伊東線「伊豆多賀駅」から海側へ徒歩約7〜10分。夜は帰りの列車時刻を事前に確認し、周辺住宅への騒音とごみの持ち帰りに配慮しましょう。</p><a class="button-primary mt-7 bg-white text-ink" href={data.entity.mapsShareUrl} target="_blank" rel="noopener noreferrer">Googleマップで公園を見る ↗</a><a class="mt-5 block text-sm text-sea underline" href="/access/">電車・バスでのアクセスを見る →</a></aside>
+  </div></section>
+  <section class="section-space bg-paper"><div class="container-site"><SectionHeading eyebrow="HOW TO ENJOY" title="花火を始める前の三つの確認" />
+    <div class="mt-9 grid gap-5 md:grid-cols-3">{[
+      ['01','開催日かどうか','海水浴場の期間外は指定花火広場の運用を前提にしない。公式の実施案内を確認します。'],
+      ['02','区画内かどうか','ビーチ全域が花火可能なわけではありません。指定された区画と現地掲示を確認します。'],
+      ['03','片付けと帰路','使用済み花火は係員の指示に沿って処理。帰りの駅までの道と列車時刻も先に確認します。']
+    ].map(([num,heading,body]) => <article class="soft-card p-7"><p class="text-sm font-bold text-sea-dark">{num}</p><h3 class="mt-4 font-serif text-xl font-semibold">{heading}</h3><p class="mt-4 text-sm leading-8 text-ink-soft">{body}</p></article>)}</div>
+  </div></section>
+  <section class="section-space"><div class="container-site"><SectionHeading eyebrow="FAQ" title="よくある質問" /><div class="mt-8 grid gap-5">{questions.map(({q,a}) => <article class="soft-card p-7"><h3 class="font-bold">{q}</h3><p class="mt-3 text-sm leading-8 text-ink-soft">{a}</p></article>)}</div>
+    <div class="mt-10 rounded-3xl bg-sea-pale p-7"><h2 class="font-serif text-xl font-semibold">公式情報・周辺ガイド</h2><p class="mt-3 text-sm leading-7">確認先：<a class="underline" href="https://izutaga.jp/menu.php?now=1074&obj=153" target="_blank" rel="noopener noreferrer">多賀観光協会の長浜海水浴場案内 ↗</a>（2026年の運用内容を2026年11月18日参照）。</p><p class="mt-3 text-sm"><a class="font-bold underline" href="/beach/">海水浴・設備ガイド →</a>　<a class="font-bold underline" href="/parking/">駐車場ガイド →</a>　<a class="font-bold underline" href="/events/">イベント情報 →</a></p></div>
+  </div></section>
+</BaseLayout>
