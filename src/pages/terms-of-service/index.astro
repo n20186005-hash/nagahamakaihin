@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+const title='利用規約';
+const description='長浜海浜公園・伊豆多賀の独立観光ガイドを利用する際の条件、情報の性質、外部リンクと免責事項について。';
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="TERMS OF SERVICE" title="利用規約" text="長浜海浜ガイドの情報を安全にご利用いただくためのご案内です。" icon="waves" />
+  <section class="section-space">
+    <article class="container-site max-w-4xl rounded-[2rem] border border-ink/10 bg-paper p-7 shadow-card sm:p-11">
+      <div class="space-y-10 text-base leading-8 text-ink-soft">
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">1. サイトの位置づけ</h2><p class="mt-4">NagahamaKaihin.comは、長浜海浜公園、伊豆多賀および周辺地域を訪れる旅行者に向けた独立した観光情報サイトです。熱海市、公園管理者、交通事業者その他の公的機関・団体の公式サイトではなく、これらの組織を代表しません。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">2. 情報の利用</h2><p class="mt-4">交通、料金、開放時間、海水浴場の設備、イベント、気象、施設の利用条件は予告なく変わる場合があります。本サイトの内容は旅行計画の参考情報です。出発前と現地では、施設管理者・自治体・交通事業者の最新案内を優先してください。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">3. 安全と利用者の判断</h2><p class="mt-4">海や港、道路、階段、展望施設には天候や混雑、立入制限などのリスクがあります。標識と係員の案内に従い、ご自身の体力と現地状況に合わせて行動してください。本サイトは特定の行動の安全性を保証するものではありません。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">4. 外部リンクと地図</h2><p class="mt-4">Googleマップ、公式施設サイト、公共交通の案内など、外部サービスへのリンクがあります。外部サービスの内容、位置情報、利用条件、プライバシーについては各提供者が定めます。地図の検索結果が複数ある場合は目的地の名称・住所を現地で照合してください。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">5. コンテンツと画像</h2><p class="mt-4">文章・デザイン・画像にはそれぞれの権利者がいます。写真の出典は<a class="font-bold text-sea-dark underline" href="/credits/">写真・情報出典</a>にまとめています。本サイトの掲載内容を再利用する場合は、必要な権利と出典を個別に確認してください。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">6. サイトの変更</h2><p class="mt-4">情報の修正、ページの追加・変更、機能の一時停止などを行う場合があります。本規約も運営内容に合わせて更新します。個人情報やCookieについては<a class="font-bold text-sea-dark underline" href="/privacy/">プライバシーポリシー</a>と<a class="font-bold text-sea-dark underline" href="/cookie-settings/">Cookie設定</a>をご覧ください。</p><p class="mt-3">最終更新：2026年11月19日</p></section>
+      </div>
+    </article>
+  </section>
+</BaseLayout>
