@@ -65,12 +65,21 @@ const schemas = schema ? [baseSchema, ...(Array.isArray(schema) ? schema : [sche
 
     {schemas.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
 
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${data.site.ga4}`}></script>
     <script is:inline define:vars={{ measurementId: data.site.ga4 }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', measurementId);
+      const cookieChoice = (() => {
+        try { return localStorage.getItem('nagahama-analytics-consent'); }
+        catch { return null; }
+      })();
+      if (cookieChoice === 'accepted' && /^G-[A-Z0-9]+$/.test(measurementId)) {
+        gtag('js', new Date());
+        gtag('config', measurementId);
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+        document.head.appendChild(gaScript);
+      }
     </script>
   </head>
   <body>
