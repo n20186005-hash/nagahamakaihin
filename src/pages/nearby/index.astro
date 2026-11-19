@@ -8,14 +8,20 @@ const description = '長浜海浜公園と合わせて歩きたい伊豆多賀�
 const mapTrail = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('さくらの名所散策路 四季の道 熱海市上多賀');
 const mapStation = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('伊豆多賀駅 静岡県熱海市');
 const mapMarine = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('小山臨海公園 マリンタワー 熱海市下多賀');
+const mapIzuTaga = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('伊豆多賀駅 静岡県熱海市上多賀');
+const mapAjiro = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('網代漁港 静岡県熱海市網代');
+const mapCastle = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('熱海城 静岡県熱海市熱海1993');
 const places = [
   {name:'さくらの名所散策路（四季の道）',kind:'高台の桜と多賀湾の眺望',link:mapTrail,href:'/nearby/shiki-no-michi/',image:'/images/nearby/shiki-walk.jpg',description:'伊豆多賀駅と熱海高校を結ぶ高台の散策路。2017年に開通し、道沿いにアタミザクラやヒマラヤザクラが植えられています。',photo:'桜越しに海を見下ろす構図。開花状況と通行状況を見て撮影位置を選びましょう。'},
-  {name:'小山臨海公園・マリンタワー',kind:'海沿いの公園と展望',link:mapMarine,href:'/nearby/koyama-rinkai-park/',image:'/images/nearby/koyama-park.jpg',description:'網代方面の公園。体育館、テニスコート、芝生広場があり、マリンタワー周辺から多賀湾を見渡せると紹介されています。',photo:'高い位置から湾と海岸線を入れた風景写真。展望施設の開放状況を事前に確認してください。'}
+  {name:'小山臨海公園・マリンタワー',kind:'海沿いの公園と展望',link:mapMarine,href:'/nearby/koyama-rinkai-park/',image:'/images/nearby/koyama-park.jpg',description:'網代方面の公園。体育館、テニスコート、芝生広場があり、マリンタワー周辺から多賀湾を見渡せると紹介されています。',photo:'高い位置から湾と海岸線を入れた風景写真。展望施設の開放状況を事前に確認してください。'},
+  {name:'伊豆多賀駅',kind:'桜と海への散策の起点',link:mapIzuTaga,href:'/nearby/izu-taga-station/',image:'/images/nearby/izu-taga-station.webp',description:'JR伊東線の駅。駅前の桜、斜面に建つ駅舎、海岸へ下る桜坂を観察でき、四季の道へ向かう出発点にもなります。',photo:'駅舎と階段、ホーム周辺の緑を撮影。列車や通行人の動線を妨げないようにしましょう。'},
+  {name:'網代漁港',kind:'漁船と港町の歴史',link:mapAjiro,href:'/nearby/ajiro-fishing-port/',image:'/images/nearby/ajiro-harbor.webp',description:'江戸時代の廻船の往来と現在の漁業が重なる、南熱海の港。現役の漁業施設なので公共の通行可能な場所から眺めます。',photo:'係留船と背後の山並みを一緒に。岸壁の作業区域には入らないでください。'},
+  {name:'熱海城',kind:'昭和の観光天守と展望',link:mapCastle,href:'/nearby/atami-castle/',image:'/images/nearby/atami-castle.webp',description:'1959年築の観光天守。桃山風の外観と相模湾の展望が魅力で、長浜の海岸散策とは別の移動で訪ねる高台の施設です。',photo:'城の屋根と海岸線を同じ画角に。展望階からの撮影は館内のルールを確認してください。'}
 ];
 ---
 <BaseLayout title={title} description={description}>
   <PageHero eyebrow="EXPLORE IZU TAGA" title="伊豆多賀の海辺と高台を歩く" text="長浜海浜公園の砂浜に、高台の桜並木や湾を見晴らす公園を組み合わせる散策案内。歩く場所と移動距離の違いを確認して、自分のペースで巡りましょう。" icon="map-pin" image="/images/nagahama-calm.webp" imageAlt="散策の起点となる長浜海浜公園の海岸" />
-  <section class="section-space"><div class="container-site"><SectionHeading eyebrow="NEARBY PLACES" title="周辺で訪ねたい二つの場所" text="長浜の砂浜とは違う景色を楽しめる、実在する散策・展望スポットです。各リンクはそれぞれの場所名でGoogleマップ検索を開きます。" />
+  <section class="section-space"><div class="container-site"><SectionHeading eyebrow="NEARBY PLACES" title="周辺で訪ねたい五つの場所" text="長浜の砂浜とは違う景色を楽しめる、実在する散策・展望スポットです。各リンクはそれぞれの場所名でGoogleマップ検索を開きます。距離のある場所は別の訪問枠で計画してください。" />
     <div class="mt-9 grid gap-6 md:grid-cols-2">{places.map((place,index) => <article class="soft-card overflow-hidden"><img src={place.image} alt={`${place.name}の実景`} width="600" height="450" loading="lazy" class="aspect-[4/3] w-full object-cover" /><div class="p-7 sm:p-9"><p class="text-xs font-bold tracking-wider text-sea-dark">0{index+1} · {place.kind}</p><h2 class="mt-3 font-serif text-2xl font-semibold">{place.name}</h2><p class="mt-5 text-sm leading-8 text-ink-soft">{place.description}</p><h3 class="mt-6 font-bold">写真を撮るなら</h3><p class="mt-2 text-sm leading-7 text-ink-soft">{place.photo}</p><a class="button-secondary mt-7" href={place.href}>景点の詳しいガイドを見る →</a><a class="mt-5 block text-sm font-bold text-sea-dark underline" href={place.link} target="_blank" rel="noopener noreferrer">Googleマップ ↗</a></div></article>)}</div>
   </div></section>
   <section class="section-space bg-paper"><div class="container-site grid gap-10 lg:grid-cols-2"><div><SectionHeading eyebrow="WALKING ROUTE" title="伊豆多賀駅から四季の道へ" text="桜並木を中心に歩くなら、伊豆多賀駅を出発点にして高台の散策路を訪ねるルートがおすすめです。長浜海浜公園からは別の上り坂移動になります。" />
