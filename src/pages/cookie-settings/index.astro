@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+const title='Cookie設定';
+const description='長浜海浜ガイドの分析Cookieを許可または拒否し、保存済みの選択をいつでも変更できます。';
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="COOKIE SETTINGS" title="Cookie設定" text="アクセス解析の利用は任意です。このページでいつでも変更できます。" icon="waves" />
+  <section class="section-space">
+    <article class="container-site max-w-4xl rounded-[2rem] border border-ink/10 bg-paper p-7 shadow-card sm:p-11">
+      <div class="space-y-9 text-base leading-8 text-ink-soft">
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">必須の保存情報</h2><p class="mt-4">このサイトの表示とページ移動は、分析Cookieへの同意がなくても利用できます。Cookieの選択はブラウザのローカルストレージに保存され、次回の訪問時にも適用されます。</p></section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">アクセス解析（任意）</h2><p class="mt-4">許可した場合にのみGoogle Analytics 4のスクリプトを読み込み、ページ利用状況の把握に使います。拒否した場合は読み込みません。拒否後も、以前に第三者が設定したCookieがブラウザ内に残る場合があります。</p></section>
+        <section class="rounded-3xl bg-sea-pale p-6 sm:p-8" aria-labelledby="cookie-choice-title">
+          <h2 id="cookie-choice-title" class="font-serif text-2xl font-semibold text-ink">現在の選択</h2>
+          <p id="cookie-status" class="mt-3 font-bold text-ink" aria-live="polite">設定を読み込んでいます…</p>
+          <p class="mt-2 text-sm leading-7">選択内容はこのブラウザに保存されます。変更後にページを再読み込みすると新しい設定が適用されます。</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button id="cookie-allow" type="button" class="button-primary">分析Cookieを許可</button>
+            <button id="cookie-deny" type="button" class="button-secondary">分析Cookieを拒否</button>
+          </div>
+        </section>
+        <section><h2 class="font-serif text-2xl font-semibold text-ink">設定の変更について</h2><p class="mt-4">同じ端末でもブラウザごとに設定は異なります。ローカルストレージを消去すると選択がリセットされます。詳細は<a class="font-bold text-sea-dark underline" href="/privacy/">プライバシーポリシー</a>および<a class="font-bold text-sea-dark underline" href="/terms-of-service/">利用規約</a>をご覧ください。</p><p class="mt-3">最終更新：2026年11月19日</p></section>
+      </div>
+    </article>
+  </section>
+  <script is:inline>
+    (() => {
+      const key = 'nagahama-analytics-consent';
+      const status = document.getElementById('cookie-status');
+      const allow = document.getElementById('cookie-allow');
+      const deny = document.getElementById('cookie-deny');
+      const labels = {accepted:'分析Cookieを許可しています。',denied:'分析Cookieを拒否しています。'};
+      const read = () => { try { return localStorage.getItem(key); } catch { return null; } };
+      const render = () => { const choice=read(); status.textContent = labels[choice] || '未設定（分析Cookieは無効です）。'; };
+      function choose(value) {
+        try {
+          localStorage.setItem(key, value);
+          render();
+          window.location.reload();
+        } catch {
+          status.textContent = 'ブラウザに設定を保存できません。ブラウザの保存機能をご確認ください。';
+        }
+      }
+      allow.addEventListener('click', () => choose('accepted'));
+      deny.addEventListener('click', () => choose('denied'));
+      render();
+    })();
+  </script>
+</BaseLayout>
